@@ -18,7 +18,7 @@ It's easy to add new trackers. You can request it here or add it yourself.
 
 **To use the script, you need to have Python and PIP. Latest versions are recommended.**
 
-The script uses Chrome Webdriver, therefore, you need to have Chrome installed. 
+The script runs on Chrome Webdriver, therefore, you need to have Chrome installed. If you prefer Edge, refer to the end of the readme to do changes.  
 
 - Create a folder with a name of your choice. Example: "screenshots-bot". 
 - Clone or download the library into the folder.
@@ -36,5 +36,14 @@ The script uses Chrome Webdriver, therefore, you need to have Chrome installed.
 - Add your username on `username.name_keys()` and your password on `password.name_keys()`. 
 - Make sure to repeat the steps above for each tracker you would like to screenshot. 
 
+
+## Use Edge Instead of Chrome
+
+If you like to run it using Edge, you need to do the following changes. Before editing, we recommend using Chrome. 
+- Remove line 3 and 4: `from selenium.webdriver.chrome.options import Options` - `from webdriver_manager.chrome import ChromeDriverManager`. 
+- Add the following instead: `from selenium.webdriver.edge.service import Service as EdgeService` and `from webdriver_manager.microsoft import EdgeChromiumDriverManager`
+- Remove line 10 and 11: `options = Options()` - `options.headless = False`. 
+- Remove line 14: `driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)`
+- Replace it with `driver = webdriver.Edge(service=EdgeService(EdgeChromiumDriverManager().install()))`.
 
 This script was tested on two Windows 10 machines. 
