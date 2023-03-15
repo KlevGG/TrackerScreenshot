@@ -12,7 +12,7 @@ options.headless = False
  
 #Start the driver 
 driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
-
+#driver.maximize_window()  #Uncomment for full-screen screenshots
 #The list of supported trackers. Please remove unwanted trackers from the array.
 trackers = ["ATH", "RF", "LST", "BLU", "HUNO", "SP", "FL"]
 
