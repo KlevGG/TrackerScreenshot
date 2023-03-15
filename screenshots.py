@@ -148,4 +148,4 @@ else:
 driver.quit()
 
 
-#steps: pip install selenium webdriver-man
+#Script on GitHub: https://github.com/KlevGG/TrackerScreenshot
