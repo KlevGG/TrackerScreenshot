@@ -103,8 +103,8 @@ if "HUNO" in trackers:
     driver.find_element(By.ID, "login-button").click()
     time.sleep(2)
     datastring = datetime.datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
-    driver.save_screenshot("BLU_"+ datastring +".png")
-    print("BLU Screenshoted")
+    driver.save_screenshot("HUNO_"+ datastring +".png")
+    print("HUNO Screenshoted")
 
 #Speedapp
 if "SP" in trackers:
