@@ -22,9 +22,9 @@ The script uses Chrome Webdriver, therefore, you need to have Chrome installed.
 
 - Create a folder with a name of your choice. Example: "screenshots-bot". 
 - Clone or download the library into the folder.
-- run `pip install -r requirements.txt` to install required libraries. 
+- Run `pip install -r requirements.txt` to install required libraries. 
 - Edit `screenshots.py` with your details as instructed below. It's recommended to edit with Notepad++. 
-- run `python screenshots.py` in the terminal.
+- Run `python screenshots.py` in the terminal.
 - Screenshots will be generated for each tracker with the date and time.
 
 
