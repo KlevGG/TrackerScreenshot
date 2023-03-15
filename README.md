@@ -35,6 +35,7 @@ The script runs on Chrome Webdriver, therefore, you need to have Chrome installe
 - Add your profile link to the tracker you would like to use in `driver.get()`. 
 - Add your username on `username.name_keys()` and your password on `password.name_keys()`. 
 - Make sure to repeat the steps above for each tracker you would like to screenshot. 
+- (Optional) If you want to take full-screen screeshots, uncomment line 15: `driver.maximize_window()`
 
 
 ## Use Edge Instead of Chrome
