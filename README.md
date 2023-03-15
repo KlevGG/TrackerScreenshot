@@ -20,9 +20,9 @@ It's easy to add new trackers. You can request it here or add it yourself.
 
 The script uses Chrome Webdriver, therefore, you need to have Chrome installed. 
 
-- Install `pip install selenium` and `pip install webdriver-manager`
 - Create a folder with a name of your choice. Example: "screenshots-bot". 
-- Download "screenshots.py" into the folder by cloning or downloading manually. 
+- Clone or download the library into the folder.
+- run `pip install -r requirements.txt` to install required libraries. 
 - Edit `screenshots.py` with your details as instructed below. It's recommended to edit with Notepad++. 
 - run `python screenshots.py` in the terminal.
 - Screenshots will be generated for each tracker with the date and time.
