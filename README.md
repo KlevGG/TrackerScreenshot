@@ -10,9 +10,15 @@ Automatically create screenshots of your stats and save it as PNG, as who got th
     - Filelist (FL)
     - Hawke-Uno (HUNO)
     - LST (LST)
-
-It's easy to add new trackers. You can request it here or add it yourself. 
+    - GreatPosterWall (GPW)
+    - AnimeTorrents (ANT)
+    - Redacted (RED)
+    - SkipTheCommericals (STC)
+    - SkipTheTrailers (STT)
+    - AnimeBytes (AB)
     
+    
+It's easy to add new trackers. You can request it here or add it yourself.    
 
 ##  Setup
 
@@ -47,4 +53,8 @@ If you like to run it using Edge, you need to do the following changes. Before e
 - Remove line 14: `driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)`
 - Replace it with `driver = webdriver.Edge(service=EdgeService(EdgeChromiumDriverManager().install()))`.
 
-This script was tested on two Windows 10 machines. 
+
+*This script was tested on two Windows 10 machines.*
+
+
+<sub>Special thanks to FluxVelocorapotor and allegedlyundead for adding new trackers!</sub>
