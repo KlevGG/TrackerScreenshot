@@ -407,9 +407,9 @@ if "TDC" in config['wanted-trackers']['trackers']:
 
 if "CRT" in config['wanted-trackers']['trackers']:
     print("Entering Cathode-Ray.tube")
-    username = config['catheode-raytube']['username']
-    password = config['catheode-raytube']['password']
-    profile_url = config['catheode-raytube']['profile_url']
+    username = config['cathode-raytube']['username']
+    password = config['cathode-raytube']['password']
+    profile_url = config['cathode-raytube']['profile_url']
     
     driver.get('https://www.cathode-ray.tube/login') #Keep the link as it is, DO NOT CHANGE.
     time.sleep(3)
