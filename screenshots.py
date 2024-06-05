@@ -735,6 +735,43 @@ if "GGN" in config["wanted-trackers"]["trackers"]:
     print("GazelleGames Screenshoted")
     driver.set_window_size(size["width"], size["height"])
 
+if "PTP" in config["wanted-trackers"]["trackers"]:
+    print("Entering PassThePopcorn")
+    username = config["passthepopcorn"]["username"]
+    password = config["passthepopcorn"]["password"]
+    profile_url = config["passthepopcorn"]["profile_url"]
+
+    driver.get(profile_url)
+    time.sleep(3)  # wait 3 seconds to make sure the page loads
+
+    # Navigation - DO NOT CHANGE
+    username_field = driver.find_element(By.NAME, "username")
+    password_field = driver.find_element(By.NAME, "password")
+
+    # Send username and password
+    username_field.send_keys(username)
+    password_field.send_keys(password)
+
+    driver.find_element(By.ID, "login-button").click()
+    print("Manually solve the captcha image. Press enter when done.")
+    code = input()
+    driver.find_element(By.ID, "login-button").click()
+    time.sleep(3)
+
+    # 2FA is enabled, ask for the code
+    if driver.find_elements(By.ID, "tfa-code"):
+        code = input("Please enter the 2FA code: ")
+        code_field = driver.find_element(By.ID, "tfa-code")
+        code_field.send_keys(code)
+        verify_button = driver.find_element(By.CSS_SELECTOR, "input[value='Verify']")
+        verify_button.click()
+        time.sleep(3)
+
+    # Login and save screenshot
+    datastring = datetime.datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
+    driver.save_screenshot("screenshots/PassThePopcorn_" + datastring + ".png")
+    print("PassThePopcorn Screenshoted")
+
 else:
     driver.quit()
 

@@ -27,6 +27,7 @@ Automatically create screenshots of your stats and save it as PNG, as who got th
     - MoreThanTV (MTV)
     - HD-Torrents (HDT)
     - GazelleGames (GGN)
+    - PassThePopcorn (PTP)
 
 
 It's easy to add new trackers. You can request it here or add it yourself.

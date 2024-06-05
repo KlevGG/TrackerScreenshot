@@ -141,5 +141,10 @@ username = YOUR USERNAME
 password = YOUR PASSWORD
 profile_url = https://gazellegames.net/user.php?id=XXX
 
+[passthepopcorn]
+username = YOUR USERNAME
+password = YOUR PASSWORD
+profile_url = https://passthepopcorn.me/user.php?id=XXX
+
 
 #GitHub: https://github.com/KlevGG/TrackerScreenshot
