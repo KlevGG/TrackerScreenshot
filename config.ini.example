@@ -1,16 +1,16 @@
-#This config file holds all of your data. 
+#This config file holds all of your data.
 
-#List of supported trackers. Remove the trackers that you don't want to screenshot. Only keep what you want. 
-[wanted-trackers] 
-trackers = ["ATH", "RF", "LST", "BLU", "HUNO", "SP", "FL", "GPW", "JME", "ANT", 
+#List of supported trackers. Remove the trackers that you don't want to screenshot. Only keep what you want.
+[wanted-trackers]
+trackers = ["ATH", "RF", "LST", "BLU", "HUNO", "SP", "FL", "GPW", "JME", "ANT",
 			"RED", "STC", "STT", "AB", "TDC", "CRT", "MAM", "NBL", "TL", "OPS",
-			"SZN", "MTV", "HDT]
+			"SZN", "MTV", "HDT", "BTN"]
 
-#Referance: ["ATH", "RF", "LST", "BLU", "HUNO", "SP", "FL", "GPW", "JME", "ANT", 
+#Referance: ["ATH", "RF", "LST", "BLU", "HUNO", "SP", "FL", "GPW", "JME", "ANT",
 #			"RED", "STC", "STT", "AB", "TDC", "CRT", "MAM", "NBL", "TL", "OPS",
-#			"SZN", "MTV", "HDT]
+#			"SZN", "MTV", "HDT", "BTN"]
 
-#Edit the trackers you want to use with your details. 
+#Edit the trackers you want to use with your details.
 [aither]
 username = YOUR USERNAME
 password = YOUR PASSWORD
@@ -35,11 +35,12 @@ profile_url = https://blutopia.cc/users/XXX
 username = YOUR USERNAME
 password = YOUR PASSWORD
 profile_url = https://hawke.uno/users/XXX
+
 [speedapp]
 username = YOUR USERNAME
 password = YOUR PASSWORD
 #Do Not Change the URL
-profile_url = https://speedapp.io/profile/  
+profile_url = https://speedapp.io/profile/
 
 [filelist]
 username = YOUR USERNAME
@@ -51,7 +52,7 @@ username = YOUR USERNAME
 password = YOUR PASSWORD
 profile_url = https://greatposterwall.com/user.php?id=XXX
 
-###THE FOLLOWING ARE ADDED AND TESTED BY THE GREAT COMMUNITY### 
+###THE FOLLOWING ARE ADDED AND TESTED BY THE GREAT COMMUNITY###
 
 [animetorrents]
 username = YOUR USERNAME
@@ -118,7 +119,7 @@ profile_url = https://orpheus.network/user.php?id=XXXX
 username = YOUR USERNAME
 password = YOUR PASSWORD
 #Do not change the URL
-profile_url = https://swarmazon.club/en/view/my-statistics.php 
+profile_url = https://swarmazon.club/en/view/my-statistics.php
 
 [morethantv]
 username = YOUR USERNAME
@@ -129,6 +130,11 @@ profile_url = https://www.morethantv.me/user.php?id=XXX
 username = YOUR USERNAME
 password = YOUR PASSWORD
 profile_url = https://hd-torrents.org/usercp.php?uid=XXX
+
+[broadcasthenet]
+username = YOUR USERNAME
+password = YOUR PASSWORD
+profile_url = https://broadcasthe.net/user.php?id=XXX
 
 
 #GitHub: https://github.com/KlevGG/TrackerScreenshot
