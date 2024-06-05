@@ -116,7 +116,14 @@ if "BLU" in config['wanted-trackers']['trackers']:
     password_field.send_keys(password)
 
     #Login and save screenshot
-    driver.find_element(By.ID, "login-button").click()
+    driver.find_element(By.CLASS_NAME, "auth-form__primary-button").click()
+
+    #2FA is enabled, ask for the code
+    if driver.find_elements(By.ID, "code"):
+        code = input("Please enter the 2FA code: ")
+        code_field = driver.find_element(By.ID, "code")
+        code_field.send_keys(code)
+
     time.sleep(3)
     datastring = datetime.datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
     driver.save_screenshot("BLU_"+ datastring +".png")
