@@ -1,7 +1,5 @@
 # Required Libraries - You can change the browser driver if you would like to. More details on GitHub.
-from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
-from webdriver_manager.chrome import ChromeDriverManager
+from seleniumbase import Driver
 from selenium.webdriver.common.by import By
 import datetime
 import time
@@ -11,16 +9,9 @@ import configparser
 config = configparser.ConfigParser(interpolation=None)
 config.read("config.ini")
 
-# Headless or with Header. Some websites do not work as headless so it's recommended to keep it commented.
-options = Options()
-# options.add_argument("--headless=new")
-
-# Install the driver
-ChromeDriverManager().install()
-
 # Start the driver
-driver = webdriver.Chrome(options=options)
-# driver.maximize_window()  #Uncomment for full-screen screenshots
+driver = Driver(uc=True)
+# driver.maximize_window()  # Uncomment for full-screen screenshots
 
 if "ATH" in config["wanted-trackers"]["trackers"]:
     print("Entering Aither.")
@@ -136,10 +127,7 @@ if "HUNO" in config["wanted-trackers"]["trackers"]:
     profile_url = config["huno"]["profile_url"]
     skip = False
 
-    driver.execute_script("window.open('" + profile_url + "', '_blank')")
-    print("Waiting for 15 seconds as part of Cloudflare bypass.")
-    time.sleep(15)
-    driver.switch_to.window(driver.window_handles[-1])
+    driver.get(profile_url)
 
     time.sleep(3)  # wait 3 seconds to make sure the page loads
 
