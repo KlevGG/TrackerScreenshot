@@ -11,6 +11,8 @@ config.read("config.ini")
 
 # Start the driver
 driver = Driver(uc=True)
+# Get the current window size
+size = driver.get_window_size()
 # driver.maximize_window()  # Uncomment for full-screen screenshots
 
 if "ATH" in config["wanted-trackers"]["trackers"]:
@@ -714,17 +716,14 @@ if "GGN" in config["wanted-trackers"]["trackers"]:
     password_field = driver.find_element(By.NAME, "password")
     twofa_field = driver.find_element(By.NAME, "authkey")
 
-    print("Manually solve the captcha image. Press enter when done.")
-    input()
+    print(
+        "Manually solve the captcha image. Press enter when done. (If you use 2FA then press enter after you type the code below)"
+    )
+    code = input()
 
     # Send username and password
     username_field.send_keys(username)
     password_field.send_keys(password)
-
-    # 2FA, ask for the code
-    code = input(
-        "Please enter the 2FA code: (If you don't have 2FA, just press enter.) "
-    )
     twofa_field.send_keys(code)
 
     driver.find_element(By.CLASS_NAME, "submit").click()
@@ -734,7 +733,7 @@ if "GGN" in config["wanted-trackers"]["trackers"]:
     datastring = datetime.datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
     driver.save_screenshot("screenshots/GazelleGames_" + datastring + ".png")
     print("GazelleGames Screenshoted")
-    driver.minimize_window()
+    driver.set_window_size(size["width"], size["height"])
 
 else:
     driver.quit()
