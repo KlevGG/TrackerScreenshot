@@ -607,10 +607,18 @@ if "MTV" in config['wanted-trackers']['trackers']:
     #Send username and password
     username_field.send_keys(username)
     password_field.send_keys(password)
+    driver.find_element(By.ID, "login_button").click()
+    time.sleep(3)
+
+    #2FA is enabled, ask for the code
+    if driver.find_elements(By.NAME, "code"):
+        code = input("Please enter the 2FA code: ")
+        code_field = driver.find_element(By.NAME, "code")
+        code_field.send_keys(code)
+        driver.find_element(By.ID, "login_button").click()
+        time.sleep(4)
 
     #Login and save screenshot
-    driver.find_element(By.ID, "login_button").click()
-    time.sleep(4)
     datastring = datetime.datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
     driver.save_screenshot("screenshots/MoreThanTV_"+ datastring +".png")
     print("MoreThanTV Screenshoted")
