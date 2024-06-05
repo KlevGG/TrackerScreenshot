@@ -699,6 +699,43 @@ if "BTN" in config["wanted-trackers"]["trackers"]:
         sb.driver.save_screenshot("screenshots/BroadcasTheNet_" + datastring + ".png")
         print("BroadcasTheNet Screenshoted")
 
+if "GGN" in config["wanted-trackers"]["trackers"]:
+    print("Entering GazelleGames")
+    username = config["gazellegames"]["username"]
+    password = config["gazellegames"]["password"]
+    profile_url = config["gazellegames"]["profile_url"]
+
+    driver.maximize_window()
+    driver.get(profile_url)
+    time.sleep(3)  # wait 3 seconds to make sure the page loads
+
+    # Navigation - DO NOT CHANGE
+    username_field = driver.find_element(By.NAME, "username")
+    password_field = driver.find_element(By.NAME, "password")
+    twofa_field = driver.find_element(By.NAME, "authkey")
+
+    print("Manually solve the captcha image. Press enter when done.")
+    input()
+
+    # Send username and password
+    username_field.send_keys(username)
+    password_field.send_keys(password)
+
+    # 2FA, ask for the code
+    code = input(
+        "Please enter the 2FA code: (If you don't have 2FA, just press enter.) "
+    )
+    twofa_field.send_keys(code)
+
+    driver.find_element(By.CLASS_NAME, "submit").click()
+    time.sleep(3)
+
+    # Login and save screenshot
+    datastring = datetime.datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
+    driver.save_screenshot("screenshots/GazelleGames_" + datastring + ".png")
+    print("GazelleGames Screenshoted")
+    driver.minimize_window()
+
 else:
     driver.quit()
 

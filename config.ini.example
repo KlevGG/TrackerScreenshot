@@ -4,11 +4,11 @@
 [wanted-trackers]
 trackers = ["ATH", "RF", "LST", "BLU", "HUNO", "SP", "FL", "GPW", "JME", "ANT",
 			"RED", "STC", "STT", "AB", "TDC", "CRT", "MAM", "NBL", "TL", "OPS",
-			"SZN", "MTV", "HDT", "BTN"]
+			"SZN", "MTV", "HDT", "BTN", "GGN"]
 
 #Referance: ["ATH", "RF", "LST", "BLU", "HUNO", "SP", "FL", "GPW", "JME", "ANT",
 #			"RED", "STC", "STT", "AB", "TDC", "CRT", "MAM", "NBL", "TL", "OPS",
-#			"SZN", "MTV", "HDT", "BTN"]
+#			"SZN", "MTV", "HDT", "BTN", "GGN"]
 
 #Edit the trackers you want to use with your details.
 [aither]
@@ -135,6 +135,11 @@ profile_url = https://hd-torrents.org/usercp.php?uid=XXX
 username = YOUR USERNAME
 password = YOUR PASSWORD
 profile_url = https://broadcasthe.net/user.php?id=XXX
+
+[gazellegames]
+username = YOUR USERNAME
+password = YOUR PASSWORD
+profile_url = https://gazellegames.net/user.php?id=XXX
 
 
 #GitHub: https://github.com/KlevGG/TrackerScreenshot
