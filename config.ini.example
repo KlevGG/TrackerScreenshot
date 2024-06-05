@@ -1,5 +1,9 @@
 #This config file holds all of your data.
 
+# Browser to use for screenshots. Options are: chrome, firefox, edge, safari
+[settings]
+browser = chrome
+
 #List of supported trackers. Remove the trackers that you don't want to screenshot. Only keep what you want.
 [wanted-trackers]
 trackers = ["ATH", "RF", "LST", "BLU", "HUNO", "SP", "FL", "GPW", "JME", "ANT",

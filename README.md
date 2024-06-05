@@ -54,18 +54,15 @@ The script runs on Chrome Webdriver, therefore, you need to have Chrome installe
 - Remove unwanted trackers by renaming or deleting them from the trackers array.
 - Add your username, password, and profile link.
 - Make sure to repeat the steps above for each tracker you would like to screenshot.
-- (Optional) If you want to take full-screen screeshots, uncomment line 20 in `screenshots.py`: `driver.maximize_window()`
+- (Optional) If you want to take full-screen screeshots, uncomment line 16 in `screenshots.py`: `driver.maximize_window()`
 
 
-## Use Edge Instead of Chrome
+## Use a different browser
 
-If you like to run it using Edge, you need to do the following changes. Before editing, we recommend using Chrome.
-- Remove line 3 and 4: `from selenium.webdriver.chrome.options import Options` and `from webdriver_manager.chrome import ChromeDriverManager`.
-- Add the following instead: `from selenium.webdriver.edge.service import Service as EdgeService` and `from webdriver_manager.microsoft import EdgeChromiumDriverManager`
-- Remove line 15 and 16: `options = Options()` and `options.headless = False`.
-- Remove line 19: `driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)`
-- Replace it with `driver = webdriver.Edge(service=EdgeService(EdgeChromiumDriverManager().install()))`.
+Before editing, we recommend using Chrome. To change simply update browser in the `config.ini` file.
 
+`[settings]
+browser = chrome`
 
 *This script was tested on Windows and Debian.*
 

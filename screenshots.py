@@ -10,7 +10,7 @@ config = configparser.ConfigParser(interpolation=None)
 config.read("config.ini")
 
 # Start the driver
-driver = Driver(uc=True)
+driver = Driver(uc=True, browser=config["settings"]["browser"])
 # Get the current window size
 size = driver.get_window_size()
 # driver.maximize_window()  # Uncomment for full-screen screenshots
