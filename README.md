@@ -26,6 +26,7 @@ Automatically create screenshots of your stats and save it as PNG, as who got th
     - Swarmazon (SZN)
     - MoreThanTV (MTV)
     - HD-Torrents (HDT)
+    - BroadcasTheNet (BTN)
     - GazelleGames (GGN)
     - PassThePopcorn (PTP)
 
