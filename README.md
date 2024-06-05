@@ -29,6 +29,7 @@ Automatically create screenshots of your stats and save it as PNG, as who got th
     - BroadcasTheNet (BTN)
     - GazelleGames (GGN)
     - PassThePopcorn (PTP)
+    - BeyondHD (BHD)
 
 
 It's easy to add new trackers. You can request it here or add it yourself.
