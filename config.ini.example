@@ -1,0 +1,134 @@
+#This config file holds all of your data. 
+
+#List of supported trackers. Remove the trackers that you don't want to screenshot. Only keep what you want. 
+[wanted-trackers] 
+trackers = ["ATH", "RF", "LST", "BLU", "HUNO", "SP", "FL", "GPW", "JME", "ANT", 
+			"RED", "STC", "STT", "AB", "TDC", "CRT", "MAM", "NBL", "TL", "OPS",
+			"SZN", "MTV", "HDT]
+
+#Referance: ["ATH", "RF", "LST", "BLU", "HUNO", "SP", "FL", "GPW", "JME", "ANT", 
+#			"RED", "STC", "STT", "AB", "TDC", "CRT", "MAM", "NBL", "TL", "OPS",
+#			"SZN", "MTV", "HDT]
+
+#Edit the trackers you want to use with your details. 
+[aither]
+username = YOUR USERNAME
+password = YOUR PASSWORD
+profile_url = https://aither.cc/users/XXX
+
+[reelflix]
+username = YOUR USERNAME
+password = YOUR PASSWORD
+profile_url = https://reelflix.xyz/users/XXX
+
+[lst]
+username = YOUR USERNAME
+password = YOUR PASSWORD
+profile_url = https://lst.gg/users/XXX
+
+[blutopia]
+username = YOUR USERNAME
+password = YOUR PASSWORD
+profile_url = https://blutopia.cc/users/XXX
+
+[huno]
+username = YOUR USERNAME
+password = YOUR PASSWORD
+profile_url = https://hawke.uno/users/XXX
+[speedapp]
+username = YOUR USERNAME
+password = YOUR PASSWORD
+#Do Not Change the URL
+profile_url = https://speedapp.io/profile/  
+
+[filelist]
+username = YOUR USERNAME
+password = YOUR PASSWORD
+profile_url = https://filelist.io/userdetails.php?id=XXX
+
+[greatposterwall]
+username = YOUR USERNAME
+password = YOUR PASSWORD
+profile_url = https://greatposterwall.com/user.php?id=XXX
+
+###THE FOLLOWING ARE ADDED AND TESTED BY THE GREAT COMMUNITY### 
+
+[animetorrents]
+username = YOUR USERNAME
+password = YOUR PASSWORD
+profile_url = https://animetorrents.me/user-profile.php?uid=XXX
+
+[redacted]
+username = YOUR USERNAME
+password = YOUR PASSWORD
+profile_url = https://redacted.ch/user.php?id=XXX
+
+[skipthecommercials]
+username = YOUR USERNAME
+password = YOUR PASSWORD
+profile_url = https://skipthecommericals.xyz/users/XXX
+
+[skipthetrailers]
+username = YOUR USERNAME
+password = YOUR PASSWORD
+profile_url = https://skipthetrailers.xyz/users/XXX
+
+[animebytes]
+username = YOUR USERNAME
+password = YOUR PASSWORD
+profile_url = https://animebytes.tv/user.php?id=XXX
+
+[jme]
+username = YOUR USERNAME
+password = YOUR PASSWORD
+profile_url = https://jme-reunit3d.de/users/XXX
+
+[thedarkcommunity]
+username = YOUR USERNAME
+password = YOUR PASSWORD
+profile_url = https://thedarkcommunity.cc/users/XXX
+
+[cathode-raytube]
+username = YOUR USERNAME
+password = YOUR PASSWORD
+profile_url = https://www.cathode-ray.tube/user.php?id=XXX
+
+[myanonamouse]
+username = YOUR EMAIL
+password = YOUR PASSWORD
+profile_url = https://www.myanonamouse.net/u/XXX
+
+[nebulance]
+username = YOUR USERNAME
+password = YOUR PASSWORD
+profile_url = https://nebulance.io/user.php?id=XXXX
+
+[torrentleech]
+username = YOUR USERNAME
+password = YOUR PASSWORD
+profile_url = https://www.torrentleech.org/profile/XXX/
+
+#ORPHEUS DOES NOT WORK WITH 2FA
+[orpheus]
+username = YOUR USERNAME
+password = YOUR PASSWORD
+profile_url = https://orpheus.network/user.php?id=XXXX
+
+[swarmazon]
+username = YOUR USERNAME
+password = YOUR PASSWORD
+#Do not change the URL
+profile_url = https://swarmazon.club/en/view/my-statistics.php 
+
+[morethantv]
+username = YOUR USERNAME
+password = YOUR PASSWORD
+profile_url = https://www.morethantv.me/user.php?id=XXX
+
+[hdtorrents]
+username = YOUR USERNAME
+password = YOUR PASSWORD
+profile_url = https://hd-torrents.org/usercp.php?uid=XXX
+
+
+#GitHub: https://github.com/KlevGG/TrackerScreenshot
