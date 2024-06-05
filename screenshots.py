@@ -134,24 +134,40 @@ if "HUNO" in config['wanted-trackers']['trackers']:
     username = config['huno']['username']
     password = config['huno']['password']
     profile_url = config['huno']['profile_url']
+    skip = False
 
     driver.get(profile_url)
     time.sleep(3) #wait 3 seconds to make sure the page loads
 
-    #Navigation
-    username_field = driver.find_element(By.NAME, "username")
-    password_field = driver.find_element(By.NAME, "password")
+    if driver.find_elements(By.ID, "challenge-running"):
+        print("Please solve the challenge and press enter to continue or type 'n' and press enter to skip.")
+        response = input()
+        if response == "n":
+            skip = True
 
-    #Send username and password
-    username_field.send_keys(username)
-    password_field.send_keys(password)
+    if not skip:
+        #Navigation
+        username_field = driver.find_element(By.NAME, "username")
+        password_field = driver.find_element(By.NAME, "password")
 
-    #Login and save screenshot
-    driver.find_element(By.ID, "login-button").click()
-    time.sleep(3)
-    datastring = datetime.datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
-    driver.save_screenshot("screenshots/HUNO_"+ datastring +".png")
-    print("HUNO Screenshoted")
+        #Send username and password
+        username_field.send_keys(username)
+        password_field.send_keys(password)
+
+        #Login and save screenshot
+        driver.find_element(By.ID, "login-button").click()
+        time.sleep(3)
+
+        #2FA is enabled, ask for the code
+        if driver.find_elements(By.ID, "v_input"):
+            code = input("Please enter the 2FA code: ")
+            code_field = driver.find_element(By.ID, "v_input")
+            code_field.send_keys(code)
+            driver.find_element(By.ID, "submit_verification").click()
+            time.sleep(3)
+        datastring = datetime.datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
+        driver.save_screenshot("screenshots/HUNO_"+ datastring +".png")
+        print("HUNO Screenshoted")
 
 if "SP" in config['wanted-trackers']['trackers']:
     print("Entering Speedapp.")
