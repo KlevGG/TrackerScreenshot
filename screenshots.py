@@ -11,12 +11,15 @@ import configparser
 config = configparser.ConfigParser(interpolation=None)
 config.read('config.ini')
 
-# Headless or with Header. Some websites do not work as headless so it's recommended to keep it False.
+# Headless or with Header. Some websites do not work as headless so it's recommended to keep it commented.
 options = Options()
-options.headless = False
+# options.add_argument("--headless=new")
+
+# Install the driver
+ChromeDriverManager().install()
 
 # Start the driver
-driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
+driver = webdriver.Chrome(options=options)
 #driver.maximize_window()  #Uncomment for full-screen screenshots
 
 if "ATH" in config['wanted-trackers']['trackers']:
