@@ -136,7 +136,11 @@ if "HUNO" in config["wanted-trackers"]["trackers"]:
     profile_url = config["huno"]["profile_url"]
     skip = False
 
-    driver.get(profile_url)
+    driver.execute_script("window.open('" + profile_url + "', '_blank')")
+    print("Waiting for 15 seconds as part of Cloudflare bypass.")
+    time.sleep(15)
+    driver.switch_to.window(driver.window_handles[-1])
+
     time.sleep(3)  # wait 3 seconds to make sure the page loads
 
     if driver.find_elements(By.ID, "challenge-running"):
