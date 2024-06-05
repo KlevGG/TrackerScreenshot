@@ -1,5 +1,5 @@
 # Required Libraries - You can change the browser driver if you would like to. More details on GitHub.
-from seleniumbase import Driver
+from seleniumbase import Driver, SB
 from selenium.webdriver.common.by import By
 import datetime
 import time
@@ -661,48 +661,42 @@ if "HDT" in config["wanted-trackers"]["trackers"]:
     print("HDT Screenshoted")
 
 if "BTN" in config["wanted-trackers"]["trackers"]:
-    print("Entering BroadcasTheNet")
-    username = config["broadcasthenet"]["username"]
-    password = config["broadcasthenet"]["password"]
-    profile_url = config["broadcasthenet"]["profile_url"]
+    with SB(uc=True, locale_code="en") as sb:
+        print("Entering BroadcasTheNet")
+        username = config["broadcasthenet"]["username"]
+        password = config["broadcasthenet"]["password"]
+        profile_url = config["broadcasthenet"]["profile_url"]
 
-    driver.get(profile_url)
-    time.sleep(3)  # wait 3 seconds to make sure the page loads
+        sb.driver.uc_open_with_reconnect(profile_url, 1)
+        time.sleep(3)  # wait 3 seconds to make sure the page loads
 
-    # Navigation - DO NOT CHANGE
-    username_field = driver.find_element(By.ID, "username")
-    password_field = driver.find_element(By.ID, "password")
+        # Navigation - DO NOT CHANGE
+        username_field = "input[id='username']"
+        password_field = "input[id='password']"
+        login_button = "input[name='login']"
 
-    # Send username and password
-    username_field.send_keys(username)
-    password_field.send_keys(password)
-    driver.find_element(By.NAME, "login").click()
-    time.sleep(3)
+        # Send username and password
+        sb.type(username_field, username)
+        sb.type(password_field, password)
+        sb.driver.reconnect(0.1)
+        sb.driver.uc_click(login_button, reconnect_time=4)
+        sb.wait_for_text_not_visible("Checking", timeout=10)
 
-    if driver.find_elements(By.ID, "challenge-running"):
-        print(
-            "Please solve the challenge and press enter to continue or type 'n' and press enter to skip."
-        )
-        response = input()
-        if response == "n":
-            skip = True
-
-    if not skip:
         # 2FA is enabled, ask for the code
-        if driver.find_elements(By.ID, "code"):
+        if sb.driver.find_elements(By.ID, "code"):
             code = input("Please enter the 2FA code: ")
-            code_field = driver.find_element(By.ID, "code")
-            code_field.send_keys(code)
-            driver.find_element(By.CSS_SELECTOR, "input[type=submit]").click()
-            time.sleep(4)
+            code_field = "input[id='code']"
+            sb.type(code_field, code)
+            submit_button = "input[type='submit']"
+            sb.driver.uc_click(submit_button, reconnect_time=4)
 
-        driver.get(profile_url)
-        time.sleep(3)
-        driver.find_element(By.LINK_TEXT, "Info").click()
-        time.sleep(3)
+        sb.driver.get(profile_url)
+        # time.sleep(3)
+        info_button = "a[href='#section2']"
+        sb.driver.uc_click(info_button, reconnect_time=4)
         # Login and save screenshot
         datastring = datetime.datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
-        driver.save_screenshot("screenshots/BroadcasTheNet_" + datastring + ".png")
+        sb.driver.save_screenshot("screenshots/BroadcasTheNet_" + datastring + ".png")
         print("BroadcasTheNet Screenshoted")
 
 else:
