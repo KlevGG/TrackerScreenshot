@@ -121,7 +121,7 @@ if "BLU" in config["wanted-trackers"]["trackers"]:
     print("Blu Screenshoted")
 
 if "HUNO" in config["wanted-trackers"]["trackers"]:
-    print("Entering BLU.")
+    print("Entering HUNO.")
     username = config["huno"]["username"]
     password = config["huno"]["password"]
     profile_url = config["huno"]["profile_url"]
