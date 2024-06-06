@@ -312,10 +312,17 @@ if "RED" in config["wanted-trackers"]["trackers"]:
     # Navigation - Login
     username_field = driver.find_element(By.NAME, "username")
     password_field = driver.find_element(By.NAME, "password")
+    twofa_field = driver.find_element(By.NAME, "qrcode_confirm")
 
     # Send username and password
     username_field.send_keys(username)
     password_field.send_keys(password)
+
+    # 2FA, ask for the code
+    code = input(
+        "Please enter the 2FA code: (If you don't have 2FA, just press enter.) "
+    )
+    twofa_field.send_keys(code)
 
     # Login
     driver.find_element(By.CLASS_NAME, "submit").click()
