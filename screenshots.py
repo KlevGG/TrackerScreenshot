@@ -44,7 +44,7 @@ if "ATH" in config["wanted-trackers"]["trackers"]:
     password_field.send_keys(password)
 
     # Login and save screenshot
-    driver.find_element(By.ID, "login-button").click()
+    driver.find_element(By.CLASS_NAME, "auth-form__primary-button").click()
     take_screenshot("Aither")
     print("Aither Screenshoted")
 
