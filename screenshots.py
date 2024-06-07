@@ -663,7 +663,6 @@ if "GGN" in config["wanted-trackers"]["trackers"]:
     password = config["gazellegames"]["password"]
     profile_url = config["gazellegames"]["profile_url"]
 
-    driver.maximize_window()
     driver.get(profile_url)
 
     # Navigation - DO NOT CHANGE
