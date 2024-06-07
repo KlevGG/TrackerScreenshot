@@ -3,7 +3,6 @@ from seleniumbase import Driver, SB
 from selenium.webdriver.common.by import By
 from Screenshot import Screenshot
 import datetime
-import time
 import configparser
 
 # Read config file
