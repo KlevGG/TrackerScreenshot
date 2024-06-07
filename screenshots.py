@@ -1,7 +1,7 @@
 # Required Libraries - You can change the browser driver if you would like to. More details on GitHub.
-from seleniumbase import Driver, SB
+from seleniumbase import Driver, SB  # type: ignore
 from selenium.webdriver.common.by import By
-from Screenshot import Screenshot
+from Screenshot import Screenshot  # type: ignore
 import datetime
 import configparser
 
