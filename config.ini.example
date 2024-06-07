@@ -1,8 +1,10 @@
 #This config file holds all of your data.
 
-# Browser to use for screenshots. Options are: chrome, firefox, edge, safari
 [settings]
+# Browser to use for screenshots. Options are: chrome, firefox, edge, safari
 browser = chrome
+# Set to true if you want to take full page screenshots. Set to false if you want to take only the visible part of the page.
+full_page_screenshot = false
 
 #List of supported trackers. Remove the trackers that you don't want to screenshot. Only keep what you want.
 [wanted-trackers]

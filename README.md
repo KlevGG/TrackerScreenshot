@@ -55,7 +55,7 @@ The script runs on Chrome Webdriver, therefore, you need to have Chrome installe
 - Remove unwanted trackers by renaming or deleting them from the trackers array.
 - Add your username, password, and profile link.
 - Make sure to repeat the steps above for each tracker you would like to screenshot.
-- (Optional) If you want to take full-screen screeshots, uncomment line 16 in `screenshots.py`: `driver.maximize_window()`
+- If you want to take full-page screenshots, change the `full_page_screenshot` option to `true`. This will make use of [Selenium_Screenshot](https://github.com/PyWizards/Selenium_Screenshot) which scrolls the page and takes a screenshot of the entire page.
 
 
 ## Use a different browser
