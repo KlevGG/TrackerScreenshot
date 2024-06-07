@@ -16,7 +16,10 @@ driver = Driver(uc=True, browser=config["settings"]["browser"])
 ob = Screenshot.Screenshot()
 
 
-def take_screenshot(image_name, driver=driver):
+def take_screenshot(tracker_name, driver=driver):
+    date_string = datetime.datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
+    image_name = tracker_name + "_" + date_string + ".png"
+
     if config["settings"]["full_page_screenshot"] == "true":
         ob.full_screenshot(driver, save_path="screenshots", image_name=image_name)
     else:
@@ -44,8 +47,7 @@ if "ATH" in config["wanted-trackers"]["trackers"]:
     # Login and save screenshot
     driver.find_element(By.ID, "login-button").click()
     time.sleep(3)
-    datastring = datetime.datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
-    take_screenshot("Aither_" + datastring + ".png")
+    take_screenshot("Aither")
     print("Aither Screenshoted")
 
 
@@ -70,8 +72,7 @@ if "RF" in config["wanted-trackers"]["trackers"]:
     # Login and save screenshot
     driver.find_element(By.ID, "login-button").click()
     time.sleep(3)
-    datastring = datetime.datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
-    take_screenshot("RF_" + datastring + ".png")
+    take_screenshot("RF")
     print("Reelflix Screenshoted")
 
 
@@ -95,8 +96,7 @@ if "LST" in config["wanted-trackers"]["trackers"]:
     # Login and save screenshot
     driver.find_element(By.ID, "login-button").click()
     time.sleep(3)
-    datastring = datetime.datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
-    take_screenshot("LST_" + datastring + ".png")
+    take_screenshot("LST")
     print("LST Screenshoted")
 
 if "BLU" in config["wanted-trackers"]["trackers"]:
@@ -126,8 +126,7 @@ if "BLU" in config["wanted-trackers"]["trackers"]:
         code_field.send_keys(code)
 
     time.sleep(3)
-    datastring = datetime.datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
-    take_screenshot("BLU_" + datastring + ".png")
+    take_screenshot("BLU")
     print("Blu Screenshoted")
 
 if "HUNO" in config["wanted-trackers"]["trackers"]:
@@ -169,8 +168,8 @@ if "HUNO" in config["wanted-trackers"]["trackers"]:
             code_field.send_keys(code)
             driver.find_element(By.ID, "submit_verification").click()
             time.sleep(3)
-        datastring = datetime.datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
-        take_screenshot("HUNO_" + datastring + ".png")
+
+        take_screenshot("HUNO")
         print("HUNO Screenshoted")
 
 if "SP" in config["wanted-trackers"]["trackers"]:
@@ -193,8 +192,7 @@ if "SP" in config["wanted-trackers"]["trackers"]:
     # Login and screenshot
     driver.find_element(By.TAG_NAME, "button").click()
     time.sleep(3)
-    datastring = datetime.datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
-    take_screenshot("SP_" + datastring + ".png")
+    take_screenshot("SP")
     print("Speedapp Screenshoted")
 
 if "FL" in config["wanted-trackers"]["trackers"]:
@@ -217,8 +215,7 @@ if "FL" in config["wanted-trackers"]["trackers"]:
     # Login and screenshot
     driver.find_element(By.CLASS_NAME, "btn").click()
     time.sleep(3)
-    datastring = datetime.datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
-    take_screenshot("FL_" + datastring + ".png")
+    take_screenshot("FL")
     print("Filelist Screenshoted")
 
 
@@ -242,8 +239,7 @@ if "GPW" in config["wanted-trackers"]["trackers"]:
     # Login and save screenshot
     driver.find_element(By.CLASS_NAME, "Button").click()
     time.sleep(3)
-    datastring = datetime.datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
-    take_screenshot("GPW_" + datastring + ".png")
+    take_screenshot("GPW")
     print("GPW Screenshoted")
 
 
@@ -273,8 +269,7 @@ if "JME" in config["wanted-trackers"]["trackers"]:
     time.sleep(3)
     driver.get(profile_url)
     time.sleep(2)
-    datastring = datetime.datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
-    take_screenshot("JME_" + datastring + ".png")
+    take_screenshot("JME")
     print("JME-REUNIT3D Screenshoted")
 
 
@@ -302,8 +297,7 @@ if "ANT" in config["wanted-trackers"]["trackers"]:
     # Load profile and screenshot
     driver.get(profile_url)
     time.sleep(2)
-    datastring = datetime.datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
-    take_screenshot("ANT_" + datastring + ".png")
+    take_screenshot("ANT")
     print("ANT Screenshoted")
 
 
@@ -339,8 +333,7 @@ if "RED" in config["wanted-trackers"]["trackers"]:
     # Load profile and screenshot
     driver.get(profile_url)
     time.sleep(2)
-    datastring = datetime.datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
-    take_screenshot("RED_" + datastring + ".png")
+    take_screenshot("RED")
     print("RED Screenshoted")
 
 
@@ -364,8 +357,7 @@ if "STC" in config["wanted-trackers"]["trackers"]:
     # Login and save screenshot
     driver.find_element(By.ID, "login-button").click()
     time.sleep(2)
-    datastring = datetime.datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
-    take_screenshot("STC_" + datastring + ".png")
+    take_screenshot("STC")
     print("SkipTheCommericals Screenshoted")
 
 
@@ -389,8 +381,7 @@ if "STT" in config["wanted-trackers"]["trackers"]:
     # Login and save screenshot
     driver.find_element(By.ID, "login-button").click()
     time.sleep(3)
-    datastring = datetime.datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
-    take_screenshot("STT_" + datastring + ".png")
+    take_screenshot("STT")
     print("SkipTheTrailers Screenshoted")
 
 if "AB" in config["wanted-trackers"]["trackers"]:
@@ -419,8 +410,7 @@ if "AB" in config["wanted-trackers"]["trackers"]:
     # Load profile and screenshot
     driver.get(profile_url)  # Add your profile link
     time.sleep(3)
-    datastring = datetime.datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
-    take_screenshot("AB_" + datastring + ".png")
+    take_screenshot("AB")
     print("AnimeBytes Screenshoted")
 
 if "TDC" in config["wanted-trackers"]["trackers"]:
@@ -443,8 +433,7 @@ if "TDC" in config["wanted-trackers"]["trackers"]:
     # Login and save screenshot
     driver.find_element(By.ID, "login-button").click()
     time.sleep(4)
-    datastring = datetime.datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
-    take_screenshot("TDC_" + datastring + ".png")
+    take_screenshot("TDC")
     print("TDC Screenshoted")
 
 
@@ -474,8 +463,7 @@ if "CRT" in config["wanted-trackers"]["trackers"]:
     # Load profile and screenshot
     driver.get(profile_url)
     time.sleep(2)
-    datastring = datetime.datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
-    take_screenshot("CRT_" + datastring + ".png")
+    take_screenshot("CRT")
     print("CRT Screenshoted")
 
 if "MAM" in config["wanted-trackers"]["trackers"]:
@@ -498,8 +486,7 @@ if "MAM" in config["wanted-trackers"]["trackers"]:
     # Login and save screenshot
     driver.find_element(By.CLASS_NAME, "btn").click()
     time.sleep(4)
-    datastring = datetime.datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
-    take_screenshot("MAM_" + datastring + ".png")
+    take_screenshot("MAM")
     print("myanonamouse Screenshoted")
 
 if "NBL" in config["wanted-trackers"]["trackers"]:
@@ -522,8 +509,7 @@ if "NBL" in config["wanted-trackers"]["trackers"]:
     # Login and save screenshot
     driver.find_element(By.NAME, "login").click()
     time.sleep(4)
-    datastring = datetime.datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
-    take_screenshot("NBL_" + datastring + ".png")
+    take_screenshot("NBL")
     print("Nebulance Screenshoted")
 
 if "TL" in config["wanted-trackers"]["trackers"]:
@@ -546,8 +532,7 @@ if "TL" in config["wanted-trackers"]["trackers"]:
     # Login and save screenshot
     driver.find_element(By.CLASS_NAME, "btn").click()
     time.sleep(4)
-    datastring = datetime.datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
-    take_screenshot("TL_" + datastring + ".png")
+    take_screenshot("TL")
     print("TorrentLeech Screenshoted")
 
 if "OPS" in config["wanted-trackers"]["trackers"]:
@@ -582,8 +567,7 @@ if "OPS" in config["wanted-trackers"]["trackers"]:
     # Load profile and screenshot
     driver.get(profile_url)  # Add your profile link
     time.sleep(2)
-    datastring = datetime.datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
-    take_screenshot("OPS_" + datastring + ".png")
+    take_screenshot("OPS")
     print("OPS Screenshoted")
 
 if "SZN" in config["wanted-trackers"]["trackers"]:
@@ -610,8 +594,7 @@ if "SZN" in config["wanted-trackers"]["trackers"]:
     # Load profile and screenshot
     driver.get(profile_url)  # Keep as-is
     time.sleep(2)
-    datastring = datetime.datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
-    take_screenshot("Swarmazon_" + datastring + ".png")
+    take_screenshot("Swarmazon")
     print("Swarmazon Screenshoted")
 
 if "MTV" in config["wanted-trackers"]["trackers"]:
@@ -642,8 +625,7 @@ if "MTV" in config["wanted-trackers"]["trackers"]:
         time.sleep(4)
 
     # Login and save screenshot
-    datastring = datetime.datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
-    take_screenshot("MoreThanTV_" + datastring + ".png")
+    take_screenshot("MoreThanTV")
     print("MoreThanTV Screenshoted")
 
 if "HDT" in config["wanted-trackers"]["trackers"]:
@@ -673,8 +655,7 @@ if "HDT" in config["wanted-trackers"]["trackers"]:
     # Load profile and screenshot
     driver.get(profile_url)  # Add your profile link
     time.sleep(2)
-    datastring = datetime.datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
-    take_screenshot("HDT_" + datastring + ".png")
+    take_screenshot("HDT")
     print("HDT Screenshoted")
 
 if "BTN" in config["wanted-trackers"]["trackers"]:
@@ -712,8 +693,7 @@ if "BTN" in config["wanted-trackers"]["trackers"]:
         info_button = "a[href='#section2']"
         sb.driver.uc_click(info_button, reconnect_time=4)
         # Login and save screenshot
-        datastring = datetime.datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
-        take_screenshot("BroadcasTheNet_" + datastring + ".png", sb.driver)
+        take_screenshot("BroadcasTheNet", sb.driver)
         print("BroadcasTheNet Screenshoted")
 
 if "GGN" in config["wanted-trackers"]["trackers"]:
@@ -745,8 +725,7 @@ if "GGN" in config["wanted-trackers"]["trackers"]:
     time.sleep(3)
 
     # Login and save screenshot
-    datastring = datetime.datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
-    take_screenshot("GazelleGames_" + datastring + ".png")
+    take_screenshot("GazelleGames")
     print("GazelleGames Screenshoted")
 
 if "PTP" in config["wanted-trackers"]["trackers"]:
@@ -782,8 +761,7 @@ if "PTP" in config["wanted-trackers"]["trackers"]:
         time.sleep(3)
 
     # Login and save screenshot
-    datastring = datetime.datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
-    take_screenshot("PassThePopcorn_" + datastring + ".png")
+    take_screenshot("PassThePopcorn")
     print("PassThePopcorn Screenshoted")
 
 if "BHD" in config["wanted-trackers"]["trackers"]:
@@ -819,8 +797,7 @@ if "BHD" in config["wanted-trackers"]["trackers"]:
     driver.get(profile_url)
     time.sleep(3)
     # Login and save screenshot
-    datastring = datetime.datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
-    take_screenshot("BeyondHD_" + datastring + ".png")
+    take_screenshot("BeyondHD")
     print("BeyondHD Screenshoted")
 
 else:
