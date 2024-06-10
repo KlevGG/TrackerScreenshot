@@ -16,12 +16,17 @@ driver.implicitly_wait(3)
 ob = Screenshot.Screenshot()
 
 
-def take_screenshot(tracker_name, driver=driver):
+def take_screenshot(tracker_name, driver=driver, is_load_at_runtime=False):
     date_string = datetime.datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
     image_name = tracker_name + "_" + date_string + ".png"
 
     if config["settings"]["full_page_screenshot"] == "true":
-        ob.full_screenshot(driver, save_path="screenshots", image_name=image_name)
+        ob.full_screenshot(
+            driver,
+            save_path="screenshots",
+            image_name=image_name,
+            is_load_at_runtime=is_load_at_runtime,
+        )
     else:
         driver.save_screenshot("screenshots/" + image_name)
 
@@ -157,7 +162,11 @@ if "HUNO" in config["wanted-trackers"]["trackers"]:
             code_field.send_keys(code)
             driver.find_element(By.ID, "submit_verification").click()
 
-        take_screenshot("HUNO")
+        # is_load_at_runtime is set to ensure the full page screenshot is taken correctly
+        if config["settings"]["full_page_screenshot"] == "true":
+            take_screenshot("HUNO", is_load_at_runtime=True)
+        else:
+            take_screenshot("HUNO")
         print("HUNO Screenshoted")
 
 if "SP" in config["wanted-trackers"]["trackers"]:
@@ -714,8 +723,11 @@ if "PTP" in config["wanted-trackers"]["trackers"]:
         verify_button = driver.find_element(By.CSS_SELECTOR, "input[value='Verify']")
         verify_button.click()
 
-    # Login and save screenshot
-    take_screenshot("PassThePopcorn")
+    # is_load_at_runtime is set to ensure the full page screenshot is taken correctly
+    if config["settings"]["full_page_screenshot"] == "true":
+        take_screenshot("PassThePopcorn", is_load_at_runtime=True)
+    else:
+        take_screenshot("PassThePopcorn")
     print("PassThePopcorn Screenshoted")
 
 if "BHD" in config["wanted-trackers"]["trackers"]:
