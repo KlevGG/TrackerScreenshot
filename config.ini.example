@@ -105,7 +105,7 @@ username = YOUR USERNAME
 password = YOUR PASSWORD
 profile_url = https://www.cathode-ray.tube/user.php?id=XXX
 # DO NOT CHANGE
-login_url = https://www.cathode-ray.tube/login.php
+login_url = https://www.cathode-ray.tube/login
 
 [myanonamouse]
 username = YOUR EMAIL
