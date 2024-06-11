@@ -1,6 +1,7 @@
 # TrackerScreenshot
 Automatically create screenshots of your stats and save it as PNG, as who got the time to take screenshots manually? Currently it supports over 20 trackers and takes minutes to setup!
 
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
 ## Supported Trackers:
     - Aither (ATH)

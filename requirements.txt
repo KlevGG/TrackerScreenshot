@@ -1,2 +1,3 @@
 seleniumbase==4.27.4
 Selenium-Screenshot==2.1.0
+black==24.4.2
