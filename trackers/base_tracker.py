@@ -1,6 +1,7 @@
 import datetime
 from selenium.webdriver.common.by import By
-from Screenshot import Screenshot # type: ignore
+from Screenshot import Screenshot  # type: ignore
+
 
 class BaseTracker:
     def __init__(self, driver, config, tracker_name):
@@ -42,6 +43,17 @@ class BaseTracker:
         login_button = self.driver.find_element(By.ID, "login-button")
         login_button.click()
 
+    def hide_passkey(self):
+        try:
+            passkey_li = self.driver.find_element(
+                By.XPATH, "//li[contains(text(), 'Passkey')]"
+            )
+            self.driver.execute_script(
+                "arguments[0].style.display = 'none';", passkey_li
+            )
+        except:  # noqa: E722
+            pass
+
     def take_screenshot(self, tracker_name, is_load_at_runtime=False):
         date_string = datetime.datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
         image_name = tracker_name + "_" + date_string + ".png"
@@ -59,5 +71,6 @@ class BaseTracker:
     def run(self):
         print("Capturing " + self.tracker_name)
         self.login()
+        self.hide_passkey()
         self.take_screenshot(self.tracker_name)
         print("Captured " + self.tracker_name)
