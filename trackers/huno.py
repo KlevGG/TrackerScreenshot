@@ -1,6 +1,6 @@
-
 from selenium.webdriver.common.by import By
 from .base_tracker import BaseTracker
+
 
 class HunoTracker(BaseTracker):
     def __init__(self, driver, config):

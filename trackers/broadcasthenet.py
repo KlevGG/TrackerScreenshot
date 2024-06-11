@@ -1,6 +1,7 @@
-from seleniumbase import SB # type: ignore
+from seleniumbase import SB  # type: ignore
 from selenium.webdriver.common.by import By
 from .base_tracker import BaseTracker
+
 
 class BroadcasthenetTracker(BaseTracker):
     def __init__(self, driver, config):

@@ -1,6 +1,7 @@
 from selenium.webdriver.common.by import By
 from .base_tracker import BaseTracker
 
+
 class RedactedTracker(BaseTracker):
     def __init__(self, driver, config):
         self.tracker_name = "redacted"

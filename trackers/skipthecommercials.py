@@ -1,5 +1,6 @@
 from .base_tracker import BaseTracker
 
+
 class SkipthecommercialsTracker(BaseTracker):
     def __init__(self, driver, config):
         self.tracker_name = "skipthecommercials"
