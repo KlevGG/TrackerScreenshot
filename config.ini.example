@@ -1,5 +1,3 @@
-#This config file holds all of your data.
-
 [settings]
 # Browser to use for screenshots. Options are: chrome, firefox, edge, safari, brave, opera
 # If using brave or opera, you need to specify the binary location.
@@ -8,15 +6,15 @@ binary_location = C:\Program Files\BraveSoftware\Brave-Browser\Application\brave
 # Set to true if you want to take full page screenshots. Set to false if you want to take only the visible part of the page.
 full_page_screenshot = false
 
-#List of supported trackers. Remove the trackers that you don't want to screenshot. Only keep what you want.
+# List of supported trackers. Remove the trackers that you don't want to screenshot. Only keep what you want.
 [wanted-trackers]
-trackers = ["AB", "ANT", "ATH", "BHD", "BLU", "BTN", "CRT", "FL", "GGN", "GPW",
-			"HDT", "HUNO", "JME", "LST", "MAM", "MTV", "NBL", "OPS", "OTW", "PTP",
-			"RED", "RF", "SP", "STC", "STT", "SZN", "TDC", "TL"]
+trackers = ["aither", "reelflix", "lst", "blutopia", "huno", "speedapp", "filelist", "greatposterwall", "jme", "animetorrents",
+			"redacted", "skipthecommercials", "skipthetrailers", "animebytes", "thedarkcommunity", "cathode-raytube", "myanonamouse", "nebulance", "torrentleech", "orpheus",
+			"swarmazon", "morethantv", "hdtorrents", "broadcasthenet", "gazellegames", "beyond-hd"]
 
-#Referance: ["AB", "ANT", "ATH", "BHD", "BLU", "BTN", "CRT", "FL", "GGN", "GPW",
-#			"HDT", "HUNO", "JME", "LST", "MAM", "MTV", "NBL", "OPS", "OTW", "PTP",
-#			"RED", "RF", "SP", "STC", "STT", "SZN", "TDC", "TL"]
+# Reference: ["aither", "reelflix", "lst", "blutopia", "huno", "speedapp", "filelist", "greatposterwall", "jme", "animetorrents",
+#			"redacted", "skipthecommercials", "skipthetrailers", "animebytes", "thedarkcommunity", "cathode-raytube", "myanonamouse", "nebulance", "torrentleech", "orpheus",
+#			"swarmazon", "morethantv", "hdtorrents", "broadcasthenet", "gazellegames", "beyond-hd"]
 
 #Edit the trackers you want to use with your details.
 [aither]
@@ -47,7 +45,7 @@ profile_url = https://hawke.uno/users/XXX
 [speedapp]
 username = YOUR USERNAME
 password = YOUR PASSWORD
-#Do Not Change the URL
+# DO NOT CHANGE
 profile_url = https://speedapp.io/profile/
 
 [filelist]
@@ -66,6 +64,8 @@ profile_url = https://greatposterwall.com/user.php?id=XXX
 username = YOUR USERNAME
 password = YOUR PASSWORD
 profile_url = https://animetorrents.me/user-profile.php?uid=XXX
+# DO NOT CHANGE
+login_url = https://animetorrents.me/login.php
 
 [redacted]
 username = YOUR USERNAME
@@ -86,11 +86,14 @@ profile_url = https://skipthetrailers.xyz/users/XXX
 username = YOUR USERNAME
 password = YOUR PASSWORD
 profile_url = https://animebytes.tv/user.php?id=XXX
+login_url = https://animebytes.tv/user.php
 
 [jme]
 username = YOUR USERNAME
 password = YOUR PASSWORD
 profile_url = https://jme-reunit3d.de/users/XXX
+# DO NOT CHANGE
+login_url = https://jme-reunit3d.de/login
 
 [thedarkcommunity]
 username = YOUR USERNAME
@@ -101,6 +104,8 @@ profile_url = https://thedarkcommunity.cc/users/XXX
 username = YOUR USERNAME
 password = YOUR PASSWORD
 profile_url = https://www.cathode-ray.tube/user.php?id=XXX
+# DO NOT CHANGE
+login_url = https://www.cathode-ray.tube/login.php
 
 [myanonamouse]
 username = YOUR EMAIL
@@ -117,17 +122,19 @@ username = YOUR USERNAME
 password = YOUR PASSWORD
 profile_url = https://www.torrentleech.org/profile/XXX/
 
-#ORPHEUS DOES NOT WORK WITH 2FA
 [orpheus]
 username = YOUR USERNAME
 password = YOUR PASSWORD
 profile_url = https://orpheus.network/user.php?id=XXXX
+# DO NOT CHANGE
+login_url = https://orpheus.network/login.php
 
 [swarmazon]
 username = YOUR USERNAME
 password = YOUR PASSWORD
-#Do not change the URL
+# DO NOT CHANGE URLS
 profile_url = https://swarmazon.club/en/view/my-statistics.php
+login_url = https://swarmazon.club/en/account/login.php
 
 [morethantv]
 username = YOUR USERNAME
@@ -138,6 +145,8 @@ profile_url = https://www.morethantv.me/user.php?id=XXX
 username = YOUR USERNAME
 password = YOUR PASSWORD
 profile_url = https://hd-torrents.org/usercp.php?uid=XXX
+# DO NOT CHANGE
+login_url = https://hd-torrents.org
 
 [broadcasthenet]
 username = YOUR USERNAME
