@@ -18,7 +18,7 @@ if browser == "brave" or browser == "opera":
     )
 else:
     driver = Driver(uc=True, browser=browser)
-driver.implicitly_wait(3)
+driver.implicitly_wait(6)
 
 ob = Screenshot.Screenshot()
 
