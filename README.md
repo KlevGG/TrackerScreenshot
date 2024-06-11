@@ -62,7 +62,9 @@ The script runs on Chrome Webdriver, therefore, you need to have Chrome installe
 ## Use a different browser
 
 Before editing, we recommend using Chrome. To change simply update browser in the `config.ini` file.
-Options are: `chrome`, `firefox`, `edge`, `safari`
+Options are: `chrome`, `firefox`, `edge`, `safari`, `brave`, `opera`
+
+**Note**: If using Brave or Opera you must specify `binary_location` in the `config.ini` file.
 
 ```
 [settings]

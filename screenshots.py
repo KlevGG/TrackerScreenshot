@@ -9,8 +9,15 @@ import configparser
 config = configparser.ConfigParser(interpolation=None)
 config.read("config.ini")
 
+browser = config["settings"]["browser"]
+
 # Start the driver
-driver = Driver(uc=True, browser=config["settings"]["browser"])
+if browser == "brave" or browser == "opera":
+    driver = Driver(
+        uc=True, browser="chrome", binary_location=config["settings"]["binary_location"]
+    )
+else:
+    driver = Driver(uc=True, browser=browser)
 driver.implicitly_wait(3)
 
 ob = Screenshot.Screenshot()
