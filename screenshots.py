@@ -442,6 +442,13 @@ if "CRT" in config["wanted-trackers"]["trackers"]:
     # Login
     driver.find_element(By.ID, "login_button").click()
 
+    # 2FA is enabled, ask for the code
+    if driver.find_elements(By.NAME, "code"):
+        code = input("Please enter the 2FA code: ")
+        code_field = driver.find_element(By.NAME, "code")
+        code_field.send_keys(code)
+        driver.find_element(By.ID, "login_button").click()
+
     # Load profile and screenshot
     driver.get(profile_url)
 
