@@ -452,6 +452,13 @@ if "CRT" in config["wanted-trackers"]["trackers"]:
     # Load profile and screenshot
     driver.get(profile_url)
 
+    # Hide passkey
+    try:
+        passkey_li = driver.find_element(By.XPATH, "//li[contains(text(), 'Passkey')]")
+        driver.execute_script("arguments[0].style.display = 'none';", passkey_li)
+    except:  # noqa: E722
+        pass
+
     take_screenshot("CRT")
     print("CRT Screenshoted")
 
@@ -602,6 +609,13 @@ if "MTV" in config["wanted-trackers"]["trackers"]:
         code_field = driver.find_element(By.NAME, "code")
         code_field.send_keys(code)
         driver.find_element(By.ID, "login_button").click()
+
+    # Hide passkey
+    try:
+        passkey_li = driver.find_element(By.XPATH, "//li[contains(text(), 'Passkey')]")
+        driver.execute_script("arguments[0].style.display = 'none';", passkey_li)
+    except:  # noqa: E722
+        pass
 
     # Login and save screenshot
     take_screenshot("MoreThanTV")
