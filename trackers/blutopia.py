@@ -1,6 +1,7 @@
 from selenium.webdriver.common.by import By
 from .base_tracker import BaseTracker
 
+
 class BlutopiaTracker(BaseTracker):
     def __init__(self, driver, config):
         self.tracker_name = "blutopia"
@@ -14,10 +15,12 @@ class BlutopiaTracker(BaseTracker):
         # Open the profile URL
         self.driver.get(profile_url)
 
-        # Find the usernam, password and login button elements
+        # Find the username, password and login button elements
         username_field = self.driver.find_element(By.NAME, "username")
         password_field = self.driver.find_element(By.NAME, "password")
-        login_button = self.driver.find_element(By.CLASS_NAME, "auth-form__primary-button")
+        login_button = self.driver.find_element(
+            By.CLASS_NAME, "auth-form__primary-button"
+        )
 
         # Send username and password
         username_field.send_keys(username)

@@ -1,6 +1,7 @@
 from selenium.webdriver.common.by import By
 from .base_tracker import BaseTracker
 
+
 class CathoderaytubeTracker(BaseTracker):
     def __init__(self, driver, config):
         self.tracker_name = "cathode-raytube"
@@ -15,7 +16,7 @@ class CathoderaytubeTracker(BaseTracker):
         # Open the login URL
         self.driver.get(login_url)
 
-        # Find the usernam, password and login button elements
+        # Find the username, password and login button elements
         username_field = self.driver.find_element(By.NAME, "username")
         password_field = self.driver.find_element(By.NAME, "password")
         login_button = self.driver.find_element(By.ID, "login_button")

@@ -1,6 +1,7 @@
 from selenium.webdriver.common.by import By
 from .base_tracker import BaseTracker
 
+
 class PassthepopcornTracker(BaseTracker):
     def __init__(self, driver, config):
         self.tracker_name = "passthepopcorn"
@@ -14,7 +15,7 @@ class PassthepopcornTracker(BaseTracker):
         # Open the profile URL
         self.driver.get(profile_url)
 
-        # Find the usernam, password and login button elements
+        # Find the username, password and login button elements
         username_field = self.driver.find_element(By.NAME, "username")
         password_field = self.driver.find_element(By.NAME, "password")
         login_button = self.driver.find_element(By.ID, "login-button")
@@ -39,7 +40,9 @@ class PassthepopcornTracker(BaseTracker):
         if code_field:
             code = input("Please enter the 2FA code: ")
             code_field.send_keys(code)
-            verify_button = self.driver.find_element(By.CSS_SELECTOR, "input[value='Verify']")
+            verify_button = self.driver.find_element(
+                By.CSS_SELECTOR, "input[value='Verify']"
+            )
             verify_button.click()
 
     def take_screenshot(self, tracker_name, is_load_at_runtime=False):
