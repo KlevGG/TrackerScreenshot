@@ -4,6 +4,7 @@ from selenium.webdriver.common.by import By
 from Screenshot import Screenshot  # type: ignore
 import datetime
 import configparser
+import time
 
 # Read config file
 config = configparser.ConfigParser(interpolation=None)
