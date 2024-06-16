@@ -46,8 +46,7 @@ class HunoTracker(BaseTracker):
                 verify_button.click()
 
     def take_screenshot(self, tracker_name, is_load_at_runtime=False):
-        # super().take_screenshot(self.tracker_name)
-        if self.config["settings"]["full_page_screenshot"] == "true":
+        if self.config["settings"].get("full_page_screenshot", "false") == "true":
             super().take_screenshot(self.tracker_name, is_load_at_runtime=True)
         else:
             super().take_screenshot(self.tracker_name)

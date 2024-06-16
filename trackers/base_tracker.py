@@ -58,7 +58,7 @@ class BaseTracker:
         date_string = datetime.datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
         image_name = tracker_name + "_" + date_string + ".png"
 
-        if self.config["settings"]["full_page_screenshot"] == "true":
+        if self.config["settings"].get("full_page_screenshot", "false") == "true":
             self.ob.full_screenshot(
                 self.driver,
                 save_path="screenshots",
