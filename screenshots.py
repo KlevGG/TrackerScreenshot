@@ -9,10 +9,21 @@ import configparser
 config = configparser.ConfigParser(interpolation=None)
 config.read("config.ini")
 
+if "browser" not in config["settings"]:
+    config["settings"]["browser"] = "chrome"
 browser = config["settings"]["browser"]
 
 # Start the driver
 if browser == "brave" or browser == "opera":
+    # If the binary_location is not set in the config file, warn the user
+    if (
+        "binary_location" not in config["settings"]
+        or config["settings"]["binary_location"] == ""
+    ):
+        print(
+            "Please set the binary_location in the config file for Brave or Opera browser."
+        )
+        exit()
     driver = Driver(
         uc=True, browser="chrome", binary_location=config["settings"]["binary_location"]
     )
@@ -27,7 +38,7 @@ def take_screenshot(tracker_name, driver=driver, is_load_at_runtime=False):
     date_string = datetime.datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
     image_name = tracker_name + "_" + date_string + ".png"
 
-    if config["settings"]["full_page_screenshot"] == "true":
+    if config["settings"].get("full_page_screenshot", "false") == "true":
         ob.full_screenshot(
             driver,
             save_path="screenshots",
@@ -170,7 +181,7 @@ if "HUNO" in config["wanted-trackers"]["trackers"]:
             driver.find_element(By.ID, "submit_verification").click()
 
         # is_load_at_runtime is set to ensure the full page screenshot is taken correctly
-        if config["settings"]["full_page_screenshot"] == "true":
+        if config["settings"].get("full_page_screenshot", "false") == "true":
             take_screenshot("HUNO", is_load_at_runtime=True)
         else:
             take_screenshot("HUNO")
@@ -752,7 +763,7 @@ if "PTP" in config["wanted-trackers"]["trackers"]:
         verify_button.click()
 
     # is_load_at_runtime is set to ensure the full page screenshot is taken correctly
-    if config["settings"]["full_page_screenshot"] == "true":
+    if config["settings"].get("full_page_screenshot", "false") == "true":
         take_screenshot("PassThePopcorn", is_load_at_runtime=True)
     else:
         take_screenshot("PassThePopcorn")
