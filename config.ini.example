@@ -12,11 +12,11 @@ full_page_screenshot = false
 [wanted-trackers]
 trackers = ["ATH", "RF", "LST", "BLU", "HUNO", "SP", "FL", "GPW", "JME", "ANT",
 			"RED", "STC", "STT", "AB", "TDC", "CRT", "MAM", "NBL", "TL", "OPS",
-			"SZN", "MTV", "HDT", "BTN", "GGN", "BHD"]
+			"SZN", "MTV", "HDT", "BTN", "GGN", "BHD", "OTW"]
 
 #Referance: ["ATH", "RF", "LST", "BLU", "HUNO", "SP", "FL", "GPW", "JME", "ANT",
 #			"RED", "STC", "STT", "AB", "TDC", "CRT", "MAM", "NBL", "TL", "OPS",
-#			"SZN", "MTV", "HDT", "BTN", "GGN", "BHD"]
+#			"SZN", "MTV", "HDT", "BTN", "GGN", "BHD", "OTW"]
 
 #Edit the trackers you want to use with your details.
 [aither]
@@ -158,6 +158,11 @@ profile_url = https://passthepopcorn.me/user.php?id=XXX
 username = YOUR USERNAME
 password = YOUR PASSWORD
 profile_url = https://beyond-hd.me/XXX.XXX
+
+[oldtoons]
+username = YOUR USERNAME
+password = YOUR PASSWORD
+profile_url = https://oldtoons.world/users/XXX
 
 
 #GitHub: https://github.com/KlevGG/TrackerScreenshot

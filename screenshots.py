@@ -801,6 +801,34 @@ if "BHD" in config["wanted-trackers"]["trackers"]:
     take_screenshot("BeyondHD")
     print("BeyondHD Screenshoted")
 
+if "OTW" in config["wanted-trackers"]["trackers"]:
+    print("Entering OTW.")
+    username = config["oldtoons"]["username"]
+    password = config["oldtoons"]["password"]
+    profile_url = config["oldtoons"]["profile_url"]
+
+    driver.get(profile_url)
+
+    # Navigation
+    username_field = driver.find_element(By.NAME, "username")
+    password_field = driver.find_element(By.NAME, "password")
+
+    # Send username and password
+    username_field.send_keys(username)
+    password_field.send_keys(password)
+
+    # Login and save screenshot
+    driver.find_element(By.CLASS_NAME, "auth-form__primary-button").click()
+
+    # 2FA is enabled, ask for the code
+    if driver.find_elements(By.ID, "code"):
+        code = input("Please enter the 2FA code: ")
+        code_field = driver.find_element(By.ID, "code")
+        code_field.send_keys(code)
+
+    take_screenshot("OTW")
+    print("OTW Screenshoted")
+
 else:
     driver.quit()
 
