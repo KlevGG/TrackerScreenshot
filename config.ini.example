@@ -10,11 +10,11 @@ full_page_screenshot = false
 [wanted-trackers]
 trackers = ["aither", "reelflix", "lst", "blutopia", "huno", "speedapp", "filelist", "greatposterwall", "jme", "animetorrents",
 			"redacted", "skipthecommercials", "skipthetrailers", "animebytes", "thedarkcommunity", "cathode-raytube", "myanonamouse", "nebulance", "torrentleech", "orpheus",
-			"swarmazon", "morethantv", "hdtorrents", "broadcasthenet", "gazellegames", "beyond-hd"]
+			"swarmazon", "morethantv", "hdtorrents", "broadcasthenet", "gazellegames", "beyond-hd", "oldtoons"]
 
 # Reference: ["aither", "reelflix", "lst", "blutopia", "huno", "speedapp", "filelist", "greatposterwall", "jme", "animetorrents",
 #			"redacted", "skipthecommercials", "skipthetrailers", "animebytes", "thedarkcommunity", "cathode-raytube", "myanonamouse", "nebulance", "torrentleech", "orpheus",
-#			"swarmazon", "morethantv", "hdtorrents", "broadcasthenet", "gazellegames", "beyond-hd"]
+#			"swarmazon", "morethantv", "hdtorrents", "broadcasthenet", "gazellegames", "beyond-hd", "oldtoons"]
 
 #Edit the trackers you want to use with your details.
 [aither]
