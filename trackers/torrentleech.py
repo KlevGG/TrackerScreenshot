@@ -45,6 +45,36 @@ class TorrentleechTracker(BaseTracker):
             profile_url = self.config[self.tracker_name]["profile_url"]
             self.driver.get(profile_url)
 
+        self.hide_secrets()
+
+    def hide_secrets(self):
+        irc_tr = self.driver.find_element(By.XPATH, "//td[text()='IRC Key']/..")
+        irc_td = irc_tr.find_elements(By.XPATH, "./*")[1]
+        self.driver.execute_script("arguments[0].textContent = 'Hidden';", irc_td)
+
+        rss_tr = self.driver.find_element(By.XPATH, "//td[text()='RSS Key']/..")
+        rss_td = rss_tr.find_elements(By.XPATH, "./*")[1]
+        self.driver.execute_script("arguments[0].textContent = 'Hidden';", rss_td)
+
+        passkey_tr = self.driver.find_element(
+            By.XPATH, "//td[text()='Torrent Passkey']/.."
+        )
+        passkey_td = passkey_tr.find_elements(By.XPATH, "./*")[1]
+        self.driver.execute_script("arguments[0].textContent = 'Hidden';", passkey_td)
+
+        alt_2fa_tr = self.driver.find_element(
+            By.XPATH, "//td[text()='Alt 2FA Token']/.."
+        )
+        alt_2fa_td = alt_2fa_tr.find_elements(By.XPATH, "./*")[1]
+        self.driver.execute_script("arguments[0].textContent = 'Hidden';", alt_2fa_td)
+
+        vpn_msg_placeholder = self.driver.find_element(
+            By.CLASS_NAME, "vpn-msg-placeholder"
+        )
+        self.driver.execute_script(
+            "arguments[0].style.display = 'none';", vpn_msg_placeholder
+        )
+
     def take_screenshot(self, tracker_name, is_load_at_runtime=False):
         super().take_screenshot(self.tracker_name)
 
