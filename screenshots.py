@@ -34,7 +34,18 @@ driver.implicitly_wait(6)
 ob = Screenshot.Screenshot()
 
 
+def hide_notification(driver=driver):
+    try:
+        driver.execute_script(
+            "document.querySelector('#noty_bottomRight_layout_container').style.display = 'none';"
+        )
+    except:  # noqa: E722
+        pass
+
+
 def take_screenshot(tracker_name, driver=driver, is_load_at_runtime=False):
+    hide_notification(driver)
+
     date_string = datetime.datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
     image_name = tracker_name + "_" + date_string + ".png"
 
