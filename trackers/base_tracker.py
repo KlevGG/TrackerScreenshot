@@ -54,6 +54,14 @@ class BaseTracker:
         except:  # noqa: E722
             pass
 
+    def hide_notifications(self):
+        try:
+            self.driver.execute_script(
+                "document.querySelector('#noty_bottomRight_layout_container').style.display = 'none';"
+            )
+        except:  # noqa: E722
+            pass
+
     def take_screenshot(self, tracker_name, is_load_at_runtime=False):
         date_string = datetime.datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
         image_name = tracker_name + "_" + date_string + ".png"
@@ -72,5 +80,6 @@ class BaseTracker:
         print("Capturing " + self.tracker_name)
         self.login()
         self.hide_passkey()
+        self.hide_notifications()
         self.take_screenshot(self.tracker_name)
         print("Captured " + self.tracker_name)
