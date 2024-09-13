@@ -1,5 +1,9 @@
-from seleniumbase import SB  # type: ignore
+import pyotp
 from selenium.webdriver.common.by import By
+from seleniumbase import SB  # type: ignore
+
+from utils import get_decrypted_secrets
+
 from .base_tracker import BaseTracker
 
 
@@ -31,7 +35,12 @@ class BroadcasthenetTracker(BaseTracker):
 
             # 2FA is enabled, ask for the code
             if sb.driver.find_elements(By.ID, "code"):
-                code = input("Please enter the 2FA code: ")
+                if self.config["settings"]["auto_2fa"] == "true":
+                    decrypted_secrets = get_decrypted_secrets()
+                    totp = pyotp.TOTP(decrypted_secrets[self.tracker_name])
+                    code = totp.now()
+                else:
+                    code = input("Please enter the 2FA code: ")
                 code_field = "input[id='code']"
                 sb.type(code_field, code)
                 submit_button = "input[type='submit']"
@@ -43,4 +52,4 @@ class BroadcasthenetTracker(BaseTracker):
             sb.driver.uc_click(info_button, reconnect_time=4)
             # Login and save screenshot
             super().take_screenshot("broadcasthenet")
-            print("Captured " + self.tracker_name)
+            print("Captured " + self.tracker_name + "\n")

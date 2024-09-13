@@ -82,4 +82,4 @@ class BaseTracker:
         self.hide_passkey()
         self.hide_notifications()
         self.take_screenshot(self.tracker_name)
-        print("Captured " + self.tracker_name)
+        print("Captured " + self.tracker_name + "\n")

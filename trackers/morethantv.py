@@ -1,4 +1,8 @@
+import pyotp
 from selenium.webdriver.common.by import By
+
+from utils import get_decrypted_secrets
+
 from .base_tracker import BaseTracker
 
 
@@ -30,7 +34,15 @@ class MorethantvTracker(BaseTracker):
         # 2FA is enabled, ask for the code
         code_field = self.driver.find_element(By.NAME, "code")
         if code_field:
-            code = input("Please enter the 2FA code: ")
+            decrypted_secrets = get_decrypted_secrets()
+            if (
+                self.config["settings"]["auto_2fa"] == "true"
+                and self.tracker_name in decrypted_secrets
+            ):
+                totp = pyotp.TOTP(decrypted_secrets[self.tracker_name])
+                code = totp.now()
+            else:
+                code = input("Please enter the 2FA code: ")
             code_field.send_keys(code)
             login_button = self.driver.find_element(By.ID, "login_button")
             login_button.click()

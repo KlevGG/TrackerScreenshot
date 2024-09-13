@@ -1,4 +1,8 @@
+import pyotp
 from selenium.webdriver.common.by import By
+
+from utils import get_decrypted_secrets
+
 from .base_tracker import BaseTracker
 
 
@@ -25,9 +29,14 @@ class RedactedTracker(BaseTracker):
         password_field.send_keys(password)
 
         # 2FA, ask for the code
-        code = input(
-            "Please enter the 2FA code: (If you don't have 2FA, just press enter.) "
-        )
+        if self.config["settings"]["auto_2fa"] == "true":
+            decrypted_secrets = get_decrypted_secrets()
+            totp = pyotp.TOTP(decrypted_secrets[self.tracker_name])
+            code = totp.now()
+        else:
+            code = input(
+                "Please enter the 2FA code: (If you don't have 2FA, just press enter.) "
+            )
         twofa_field.send_keys(code)
 
         login_button = self.driver.find_element(By.CLASS_NAME, "submit")

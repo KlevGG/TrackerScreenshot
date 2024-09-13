@@ -1,3 +1,6 @@
 seleniumbase==4.27.4
 Selenium-Screenshot==2.1.0
 black==24.4.2
+argon2-cffi==23.1.0
+cryptography==43.0.1
+pyotp==2.9.0

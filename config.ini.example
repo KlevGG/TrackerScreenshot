@@ -8,13 +8,13 @@ full_page_screenshot = false
 
 # List of supported trackers. Remove the trackers that you don't want to screenshot. Only keep what you want.
 [wanted-trackers]
-trackers = ["aither", "reelflix", "lst", "blutopia", "huno", "speedapp", "filelist", "greatposterwall", "jme", "animetorrents",
-			"redacted", "skipthecommercials", "skipthetrailers", "animebytes", "thedarkcommunity", "cathode-raytube", "myanonamouse", "nebulance", "torrentleech", "orpheus",
-			"swarmazon", "morethantv", "hdtorrents", "broadcasthenet", "gazellegames", "beyond-hd", "oldtoons"]
+trackers = ["animetorrents", "animebytes", "aither", "blutopia", "beyond-hd", "cathode-raytube", "filelist", "gazellegames", "greatposterwall", "hdtorrents",
+			"huno", "lst", "morethantv", "myanonamouse", "nebulance", "oldtoons", "orpheus", "redacted", "reelflix", "skipthecommercials", "skipthetrailers",
+			"speedapp", "swarmazon", "thedarkcommunity", "torrentleech"]
 
-# Reference: ["aither", "reelflix", "lst", "blutopia", "huno", "speedapp", "filelist", "greatposterwall", "jme", "animetorrents",
-#			"redacted", "skipthecommercials", "skipthetrailers", "animebytes", "thedarkcommunity", "cathode-raytube", "myanonamouse", "nebulance", "torrentleech", "orpheus",
-#			"swarmazon", "morethantv", "hdtorrents", "broadcasthenet", "gazellegames", "beyond-hd", "oldtoons"]
+# Reference: ["animetorrents", "animebytes", "aither", "blutopia", "beyond-hd", "cathode-raytube", "filelist", "gazellegames", "greatposterwall", "hdtorrents",
+#			"huno", "lst", "morethantv", "myanonamouse", "nebulance", "oldtoons", "orpheus", "redacted", "reelflix", "skipthecommercials", "skipthetrailers",
+#			"speedapp", "swarmazon", "thedarkcommunity", "torrentleech"]
 
 #Edit the trackers you want to use with your details.
 [aither]

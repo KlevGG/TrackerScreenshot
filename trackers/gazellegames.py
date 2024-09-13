@@ -1,4 +1,8 @@
+import pyotp
 from selenium.webdriver.common.by import By
+
+from utils import get_decrypted_secrets
+
 from .base_tracker import BaseTracker
 
 
@@ -25,9 +29,15 @@ class GazellegamesTracker(BaseTracker):
         password_field.send_keys(password)
 
         # 2FA, ask for the code
-        code = input(
-            "Manually solve the captcha image. Press enter when done. (If you use 2FA then press enter after you type the code below)"
-        )
+        if self.config["settings"]["auto_2fa"] == "true":
+            decrypted_secrets = get_decrypted_secrets()
+            totp = pyotp.TOTP(decrypted_secrets[self.tracker_name])
+            code = totp.now()
+            input("Manually solve the captcha image. Press enter when done.")
+        else:
+            code = input(
+                "Manually solve the captcha image. Press enter when done. (If you use 2FA then press enter after you type the code below)"
+            )
         twofa_field.send_keys(code)
 
         login_button = self.driver.find_element(By.CLASS_NAME, "submit")
