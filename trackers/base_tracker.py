@@ -62,6 +62,32 @@ class BaseTracker:
         except:  # noqa: E722
             pass
 
+    def hide_ip(self):
+        # CRT
+        try:
+            element = self.driver.find_element(By.ID, "statuscont0")
+            self.driver.execute_script("arguments[0].style.display = 'none';", element)
+        except:  # noqa: E722
+            pass
+
+        # MTV
+        try:
+            element = self.driver.find_element(By.ID, "statuscont1")
+            self.driver.execute_script("arguments[0].style.display = 'none';", element)
+        except:  # noqa: E722
+            pass
+
+        # OTW
+        try:
+            element = self.driver.find_element(
+                By.XPATH, "//h2[contains(text(), 'Clients and IP-Addresses')]"
+            )
+            self.driver.execute_script(
+                "arguments[0].parentNode.style.display = 'none';", element
+            )
+        except:  # noqa: E722
+            pass
+
     def take_screenshot(self, tracker_name, is_load_at_runtime=False):
         date_string = datetime.datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
         image_name = tracker_name + "_" + date_string + ".png"
@@ -81,5 +107,6 @@ class BaseTracker:
         self.login()
         self.hide_passkey()
         self.hide_notifications()
+        self.hide_ip()
         self.take_screenshot(self.tracker_name)
         print("Captured " + self.tracker_name + "\n")
