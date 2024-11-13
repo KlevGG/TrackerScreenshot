@@ -1,5 +1,6 @@
 import base64
 import configparser
+import os
 import sys
 from getpass import getpass
 
@@ -75,7 +76,10 @@ def get_cached_master_password():
 def get_decrypted_secrets():
     global _cached_master_password
 
-    # Read the secrets file
+    # Read the secrets file, create it if it doesn't exist
+    if not os.path.exists("secrets.ini"):
+        with open("secrets.ini", "w") as secretsfile:
+            secretsfile.write("[secrets]\n")
     secrets_config = configparser.ConfigParser()
     secrets_config.read("secrets.ini")
 

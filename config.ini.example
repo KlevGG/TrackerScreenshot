@@ -5,15 +5,17 @@ browser = chrome
 binary_location = C:\Program Files\BraveSoftware\Brave-Browser\Application\brave.exe
 # Set to true if you want to take full page screenshots. Set to false if you want to take only the visible part of the page.
 full_page_screenshot = false
+# Set to true if you want to store the 2FA secrets and use them for auto-filling 2FA codes.
+auto_2fa = false
 
 # List of supported trackers. Remove the trackers that you don't want to screenshot. Only keep what you want.
 [wanted-trackers]
-trackers = ["aither", "animetorrents", "animebytes", "beyond-hd", "blutopia", "broadcasthenet", "cathode-raytube", "filelist", "gazellegames", "greatposterwall", "hdtorrents", 
-			"huno", "jme", "lst",  "morethantv", "myanonamouse",  "nebulance", "oldtoons", "orpheus", "passthepopcorn", "redacted", "reelflix", "skipthecommercials",  
+trackers = ["aither", "animetorrents", "animebytes", "beyond-hd", "blutopia", "broadcasthenet", "cathode-raytube", "filelist", "gazellegames", "greatposterwall", "hdtorrents",
+			"huno", "jme", "lst",  "morethantv", "myanonamouse",  "nebulance", "oldtoons", "orpheus", "passthepopcorn", "redacted", "reelflix", "skipthecommercials",
 			"skipthetrailers", "speedapp", "swarmazon", "thedarkcommunity", "torrentleech"]
 
-# Reference: ["aither", "animetorrents", "animebytes", "beyond-hd", "blutopia", "broadcasthenet", "cathode-raytube", "filelist", "gazellegames", "greatposterwall", "hdtorrents", 
-			"huno", "jme", "lst",  "morethantv", "myanonamouse",  "nebulance", "oldtoons", "orpheus", "passthepopcorn", "redacted", "reelflix", "skipthecommercials",  
+# Reference: ["aither", "animetorrents", "animebytes", "beyond-hd", "blutopia", "broadcasthenet", "cathode-raytube", "filelist", "gazellegames", "greatposterwall", "hdtorrents",
+			"huno", "jme", "lst",  "morethantv", "myanonamouse",  "nebulance", "oldtoons", "orpheus", "passthepopcorn", "redacted", "reelflix", "skipthecommercials",
 			"skipthetrailers", "speedapp", "swarmazon", "thedarkcommunity", "torrentleech"]
 
 #Edit the trackers you want to use with your details.

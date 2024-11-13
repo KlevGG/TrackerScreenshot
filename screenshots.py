@@ -13,6 +13,8 @@ from utils import encrypt_secrets, get_decrypted_secrets  # type: ignore
 config = configparser.ConfigParser(interpolation=None)
 config.read("config.ini")
 
+trackers_list = json.loads(config["wanted-trackers"]["trackers"])
+
 if "auto_2fa" in config["settings"] and config["settings"]["auto_2fa"] == "true":
     ph = PasswordHasher()
     # Check if master password is stored in config file
@@ -47,9 +49,9 @@ if "auto_2fa" in config["settings"] and config["settings"]["auto_2fa"] == "true"
     # Decrypt the secrets
     decrypted_secrets = get_decrypted_secrets()
 
-    # Prompt for any missing 2FA secrets
+    # Prompt for any missing 2FA secrets, as long as the tracker is also in trackers_list
     for tracker in twofa_trackers:
-        if tracker not in decrypted_secrets:
+        if tracker not in decrypted_secrets and tracker in trackers_list:
             decrypted_secrets[tracker] = input(
                 f"Please enter the 2FA secret for {tracker}: "
             )
@@ -86,9 +88,6 @@ if browser == "brave" or browser == "opera":
 else:
     driver = Driver(uc=True, browser=browser)
 driver.implicitly_wait(6)
-
-
-trackers_list = json.loads(config["wanted-trackers"]["trackers"])
 
 # For each tracker in the config file, run the tracker class
 for tracker in trackers_list:
