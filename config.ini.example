@@ -10,13 +10,13 @@ full_page_screenshot = false
 
 #List of supported trackers. Remove the trackers that you don't want to screenshot. Only keep what you want.
 [wanted-trackers]
-trackers = ["ATH", "RF", "LST", "BLU", "HUNO", "SP", "FL", "GPW", "JME", "ANT",
-			"RED", "STC", "STT", "AB", "TDC", "CRT", "MAM", "NBL", "TL", "OPS",
-			"SZN", "MTV", "HDT", "BTN", "GGN", "BHD", "OTW"]
+trackers = ["AB", "ANT", "ATH", "BHD", "BLU", "BTN", "CRT", "FL", "GGN", "GPW",
+			"HDT", "HUNO", "JME", "LST", "MAM", "MTV", "NBL", "OPS", "OTW", "PTP", 
+			"RED", "RF", "SP", "STC", "STT", "SZN", "TDC", "TL"]
 
-#Referance: ["ATH", "RF", "LST", "BLU", "HUNO", "SP", "FL", "GPW", "JME", "ANT",
-#			"RED", "STC", "STT", "AB", "TDC", "CRT", "MAM", "NBL", "TL", "OPS",
-#			"SZN", "MTV", "HDT", "BTN", "GGN", "BHD", "OTW"]
+#Referance: ["AB", "ANT", "ATH", "BHD", "BLU", "BTN", "CRT", "FL", "GGN", "GPW",
+#			"HDT", "HUNO", "JME", "LST", "MAM", "MTV", "NBL", "OPS", "OTW", "PTP", 
+#			"RED", "RF", "SP", "STC", "STT", "SZN", "TDC", "TL"]
 
 #Edit the trackers you want to use with your details.
 [aither]
