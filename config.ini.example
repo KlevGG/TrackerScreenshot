@@ -11,11 +11,11 @@ full_page_screenshot = false
 #List of supported trackers. Remove the trackers that you don't want to screenshot. Only keep what you want.
 [wanted-trackers]
 trackers = ["AB", "ANT", "ATH", "BHD", "BLU", "BTN", "CRT", "FL", "GGN", "GPW",
-			"HDT", "HUNO", "JME", "LST", "MAM", "MTV", "NBL", "OPS", "OTW", "PTP", 
+			"HDT", "HUNO", "JME", "LST", "MAM", "MTV", "NBL", "OPS", "OTW", "PTP",
 			"RED", "RF", "SP", "STC", "STT", "SZN", "TDC", "TL"]
 
 #Referance: ["AB", "ANT", "ATH", "BHD", "BLU", "BTN", "CRT", "FL", "GGN", "GPW",
-#			"HDT", "HUNO", "JME", "LST", "MAM", "MTV", "NBL", "OPS", "OTW", "PTP", 
+#			"HDT", "HUNO", "JME", "LST", "MAM", "MTV", "NBL", "OPS", "OTW", "PTP",
 #			"RED", "RF", "SP", "STC", "STT", "SZN", "TDC", "TL"]
 
 #Edit the trackers you want to use with your details.
@@ -70,7 +70,7 @@ profile_url = https://animetorrents.me/user-profile.php?uid=XXX
 [redacted]
 username = YOUR USERNAME
 password = YOUR PASSWORD
-profile_url = https://redacted.ch/user.php?id=XXX
+profile_url = https://redacted.sh/user.php?id=XXX
 
 [skipthecommercials]
 username = YOUR USERNAME

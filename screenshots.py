@@ -327,7 +327,7 @@ if "RED" in config["wanted-trackers"]["trackers"]:
     password = config["redacted"]["password"]
     profile_url = config["redacted"]["profile_url"]
     driver.get(
-        "https://redacted.ch/login.php"
+        "https://redacted.sh/login.php"
     )  # Keep the link as it is, DO NOT CHANGE.
 
     # Navigation - Login
