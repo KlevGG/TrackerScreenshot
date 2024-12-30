@@ -1,621 +1,849 @@
 # Required Libraries - You can change the browser driver if you would like to. More details on GitHub.
-from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
-from webdriver_manager.chrome import ChromeDriverManager
+from seleniumbase import Driver, SB  # type: ignore
 from selenium.webdriver.common.by import By
+from Screenshot import Screenshot  # type: ignore
 import datetime
-import time
 import configparser
 
 # Read config file
 config = configparser.ConfigParser(interpolation=None)
-config.read('config.ini')
+config.read("config.ini")
 
-# Headless or with Header. Some websites do not work as headless so it's recommended to keep it False.
-options = Options()
-options.headless = False
+if "browser" not in config["settings"]:
+    config["settings"]["browser"] = "chrome"
+browser = config["settings"]["browser"]
 
-# Start the driver 
-driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
-#driver.maximize_window()  #Uncomment for full-screen screenshots
+# Start the driver
+if browser == "brave" or browser == "opera":
+    # If the binary_location is not set in the config file, warn the user
+    if (
+        "binary_location" not in config["settings"]
+        or config["settings"]["binary_location"] == ""
+    ):
+        print(
+            "Please set the binary_location in the config file for Brave or Opera browser."
+        )
+        exit()
+    driver = Driver(
+        uc=True, browser="chrome", binary_location=config["settings"]["binary_location"]
+    )
+else:
+    driver = Driver(uc=True, browser=browser)
+driver.implicitly_wait(6)
 
-if "ATH" in config['wanted-trackers']['trackers']:
+ob = Screenshot.Screenshot()
+
+
+def hide_notification(driver=driver):
+    try:
+        driver.execute_script(
+            "document.querySelector('#noty_bottomRight_layout_container').style.display = 'none';"
+        )
+    except:  # noqa: E722
+        pass
+
+
+def take_screenshot(tracker_name, driver=driver, is_load_at_runtime=False):
+    hide_notification(driver)
+
+    date_string = datetime.datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
+    image_name = tracker_name + "_" + date_string + ".png"
+
+    if config["settings"].get("full_page_screenshot", "false") == "true":
+        ob.full_screenshot(
+            driver,
+            save_path="screenshots",
+            image_name=image_name,
+            is_load_at_runtime=is_load_at_runtime,
+        )
+    else:
+        driver.save_screenshot("screenshots/" + image_name)
+
+
+if "ATH" in config["wanted-trackers"]["trackers"]:
     print("Entering Aither.")
-    #Get the details from the config file
-    username = config['aither']['username']
-    password = config['aither']['password']
-    profile_url = config['aither']['profile_url']
+    # Get the details from the config file
+    username = config["aither"]["username"]
+    password = config["aither"]["password"]
+    profile_url = config["aither"]["profile_url"]
 
     driver.get(profile_url)
-    time.sleep(3) #wait 3 seconds to make sure the page loads
-    
-    #Navigation - DO NOT CHANGE
+
+    # Navigation - DO NOT CHANGE
     username_field = driver.find_element(By.NAME, "username")
     password_field = driver.find_element(By.NAME, "password")
 
-    #Send username and password
+    # Send username and password
     username_field.send_keys(username)
     password_field.send_keys(password)
 
-    #Login and save screenshot
-    driver.find_element(By.ID, "login-button").click()
-    time.sleep(3)
-    datastring = datetime.datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
-    driver.save_screenshot("Aither_"+ datastring +".png")
+    # Login and save screenshot
+    driver.find_element(By.CLASS_NAME, "auth-form__primary-button").click()
+    take_screenshot("Aither")
     print("Aither Screenshoted")
 
 
-if "RF" in config['wanted-trackers']['trackers']:
+if "RF" in config["wanted-trackers"]["trackers"]:
     print("Entering Reelflix.")
-    #Get the details from the config file
-    username = config['reelflix']['username']
-    password = config['reelflix']['password']
-    profile_url = config['reelflix']['profile_url']
+    # Get the details from the config file
+    username = config["reelflix"]["username"]
+    password = config["reelflix"]["password"]
+    profile_url = config["reelflix"]["profile_url"]
 
     driver.get(profile_url)
-    time.sleep(3) #wait 3 seconds to make sure the page loads
-    
-    #Navigation
+
+    # Navigation
     username_field = driver.find_element(By.NAME, "username")
     password_field = driver.find_element(By.NAME, "password")
 
-    #Send username and password
+    # Send username and password
     username_field.send_keys(username)
     password_field.send_keys(password)
 
-    #Login and save screenshot
+    # Login and save screenshot
     driver.find_element(By.ID, "login-button").click()
-    time.sleep(3)
-    datastring = datetime.datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
-    driver.save_screenshot("RF_"+ datastring +".png")
+    take_screenshot("RF")
     print("Reelflix Screenshoted")
 
-    
-if "LST" in config['wanted-trackers']['trackers']:
+
+if "LST" in config["wanted-trackers"]["trackers"]:
     print("Entering LST.")
-    username = config['lst']['username']
-    password = config['lst']['password']
-    profile_url = config['lst']['profile_url']
+    username = config["lst"]["username"]
+    password = config["lst"]["password"]
+    profile_url = config["lst"]["profile_url"]
 
     driver.get(profile_url)
-    time.sleep(3) #wait 3 seconds to make sure the page loads
-    
-    #Navigation
+
+    # Navigation
     username_field = driver.find_element(By.NAME, "username")
     password_field = driver.find_element(By.NAME, "password")
 
-    #Send username and password
+    # Send username and password
     username_field.send_keys(username)
     password_field.send_keys(password)
 
-    #Login and save screenshot
+    # Login and save screenshot
     driver.find_element(By.ID, "login-button").click()
-    time.sleep(3)
-    datastring = datetime.datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
-    driver.save_screenshot("LST_"+ datastring +".png")
+    take_screenshot("LST")
     print("LST Screenshoted")
 
-if "BLU" in config['wanted-trackers']['trackers']:
+if "BLU" in config["wanted-trackers"]["trackers"]:
     print("Entering BLU.")
-    username = config['blutopia']['username']
-    password = config['blutopia']['password']
-    profile_url = config['blutopia']['profile_url']
+    username = config["blutopia"]["username"]
+    password = config["blutopia"]["password"]
+    profile_url = config["blutopia"]["profile_url"]
 
     driver.get(profile_url)
-    time.sleep(3) #wait 3 seconds to make sure the page loads
-    
-    #Navigation
+
+    # Navigation
     username_field = driver.find_element(By.NAME, "username")
     password_field = driver.find_element(By.NAME, "password")
 
-    #Send username and password
+    # Send username and password
     username_field.send_keys(username)
     password_field.send_keys(password)
 
-    #Login and save screenshot
-    driver.find_element(By.ID, "login-button").click()
-    time.sleep(3)
-    datastring = datetime.datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
-    driver.save_screenshot("BLU_"+ datastring +".png")
+    # Login and save screenshot
+    driver.find_element(By.CLASS_NAME, "auth-form__primary-button").click()
+
+    # 2FA is enabled, ask for the code
+    if driver.find_elements(By.ID, "code"):
+        code = input("Please enter the 2FA code: ")
+        code_field = driver.find_element(By.ID, "code")
+        code_field.send_keys(code)
+
+    take_screenshot("BLU")
     print("Blu Screenshoted")
 
-if "HUNO" in config['wanted-trackers']['trackers']:
-    print("Entering BLU.")
-    username = config['huno']['username']
-    password = config['huno']['password']
-    profile_url = config['huno']['profile_url']
+if "HUNO" in config["wanted-trackers"]["trackers"]:
+    print("Entering HUNO.")
+    username = config["huno"]["username"]
+    password = config["huno"]["password"]
+    profile_url = config["huno"]["profile_url"]
+    skip = False
 
     driver.get(profile_url)
-    time.sleep(3) #wait 3 seconds to make sure the page loads
-    
-    #Navigation
-    username_field = driver.find_element(By.NAME, "username")
-    password_field = driver.find_element(By.NAME, "password")
 
-    #Send username and password
-    username_field.send_keys(username)
-    password_field.send_keys(password)
+    if driver.find_elements(By.ID, "challenge-running"):
+        print(
+            "Please solve the challenge and press enter to continue or type 'n' and press enter to skip."
+        )
+        response = input()
+        if response == "n":
+            skip = True
 
-    #Login and save screenshot
-    driver.find_element(By.ID, "login-button").click()
-    time.sleep(3)
-    datastring = datetime.datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
-    driver.save_screenshot("HUNO_"+ datastring +".png")
-    print("HUNO Screenshoted")
+    if not skip:
+        # Navigation
+        username_field = driver.find_element(By.NAME, "username")
+        password_field = driver.find_element(By.NAME, "password")
 
-if "SP" in config['wanted-trackers']['trackers']:
+        # Send username and password
+        username_field.send_keys(username)
+        password_field.send_keys(password)
+
+        # Login and save screenshot
+        driver.find_element(By.ID, "login-button").click()
+
+        # 2FA is enabled, ask for the code
+        if driver.find_elements(By.ID, "v_input"):
+            code = input("Please enter the 2FA code: ")
+            code_field = driver.find_element(By.ID, "v_input")
+            code_field.send_keys(code)
+            driver.find_element(By.ID, "submit_verification").click()
+
+        # is_load_at_runtime is set to ensure the full page screenshot is taken correctly
+        if config["settings"].get("full_page_screenshot", "false") == "true":
+            take_screenshot("HUNO", is_load_at_runtime=True)
+        else:
+            take_screenshot("HUNO")
+        print("HUNO Screenshoted")
+
+if "SP" in config["wanted-trackers"]["trackers"]:
     print("Entering Speedapp.")
-    username = config['speedapp']['username']
-    password = config['speedapp']['password']
-    profile_url = config['speedapp']['profile_url']
-    
+    username = config["speedapp"]["username"]
+    password = config["speedapp"]["password"]
+    profile_url = config["speedapp"]["profile_url"]
+
     driver.get(profile_url)
-    time.sleep(3)
-    
-    #Navigation - Login
+
+    # Navigation - Login
     username_field = driver.find_element(By.NAME, "username")
     password_field = driver.find_element(By.NAME, "password")
-    
-    #Send username and password
+
+    # Send username and password
     username_field.send_keys(username)
     password_field.send_keys(password)
-    
-    #Login and screenshot
+
+    # Login and screenshot
     driver.find_element(By.TAG_NAME, "button").click()
-    time.sleep(3)
-    datastring = datetime.datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
-    driver.save_screenshot("SP_"+ datastring +".png")
+
+    take_screenshot("SP")
     print("Speedapp Screenshoted")
 
-if "FL" in config['wanted-trackers']['trackers']:
+if "FL" in config["wanted-trackers"]["trackers"]:
     print("Entering Filelist.")
-    username = config['filelist']['username']
-    password = config['filelist']['password']
-    profile_url = config['filelist']['profile_url']
-    
+    username = config["filelist"]["username"]
+    password = config["filelist"]["password"]
+    profile_url = config["filelist"]["profile_url"]
+
     driver.get(profile_url)
-    time.sleep(3)
-    
-    #Navigation - Login
+
+    # Navigation - Login
     username_field = driver.find_element(By.NAME, "username")
     password_field = driver.find_element(By.NAME, "password")
-    
-    #Send username and password
+
+    # Send username and password
     username_field.send_keys(username)
     password_field.send_keys(password)
-    
-    #Login and screenshot
+
+    # Login and screenshot
     driver.find_element(By.CLASS_NAME, "btn").click()
-    time.sleep(3)
-    datastring = datetime.datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
-    driver.save_screenshot("FL_"+ datastring +".png")
+
+    take_screenshot("FL")
     print("Filelist Screenshoted")
-    
 
-if "GPW" in config['wanted-trackers']['trackers']:
+
+if "GPW" in config["wanted-trackers"]["trackers"]:
     print("Entering GreatPosterWall.")
-    username = config['greatposterwall']['username']
-    password = config['greatposterwall']['password']
-    profile_url = config['greatposterwall']['profile_url']
-    
+    username = config["greatposterwall"]["username"]
+    password = config["greatposterwall"]["password"]
+    profile_url = config["greatposterwall"]["profile_url"]
+
     driver.get(profile_url)
-    time.sleep(3)
-    
-    #Navigation - Login
+
+    # Navigation - Login
     username_field = driver.find_element(By.NAME, "username")
     password_field = driver.find_element(By.NAME, "password")
-    
-    #Send username and password
+
+    # Send username and password
     username_field.send_keys(username)
     password_field.send_keys(password)
-    
-    #Login and save screenshot
+
+    # Login and save screenshot
     driver.find_element(By.CLASS_NAME, "Button").click()
-    time.sleep(3)
-    datastring = datetime.datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
-    driver.save_screenshot("GPW_"+ datastring +".png")
-    print("GPW Screenshoted") 
- 
- 
-###THE FOLLOWING ARE TESTED BY THE COMMUNITY### 
 
-if "JME" in config['wanted-trackers']['trackers']:
+    take_screenshot("GPW")
+    print("GPW Screenshoted")
+
+
+###THE FOLLOWING ARE TESTED BY THE COMMUNITY###
+
+if "JME" in config["wanted-trackers"]["trackers"]:
     print("Entering JME.")
-    username = config['jme']['username']
-    password = config['jme']['password']
-    profile_url = config['jme']['profile_url']
-    
-    driver.get('https://jme-reunit3d.de/login') #DO NOT CHANGE THIS, JME requires an extra step for login
-    time.sleep(3) #wait 3 seconds to make sure the page loads
+    username = config["jme"]["username"]
+    password = config["jme"]["password"]
+    profile_url = config["jme"]["profile_url"]
 
-    #Navigation - DO NOT CHANGE
+    driver.get(
+        "https://jme-reunit3d.de/login"
+    )  # DO NOT CHANGE THIS, JME requires an extra step for login
+
+    # Navigation - DO NOT CHANGE
     username_field = driver.find_element(By.NAME, "username")
     password_field = driver.find_element(By.NAME, "password")
-    
-    #Send username and password
+
+    # Send username and password
     username_field.send_keys(username)
     password_field.send_keys(password)
-    
-    #Login and save screenshot
+
+    # Login and save screenshot
     driver.find_element(By.ID, "login-button").click()
-    time.sleep(3)
+
     driver.get(profile_url)
-    time.sleep(2)
-    datastring = datetime.datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
-    driver.save_screenshot("JME_"+ datastring +".png")
+
+    take_screenshot("JME")
     print("JME-REUNIT3D Screenshoted")
- 
 
-if "ANT" in config['wanted-trackers']['trackers']:
+
+if "ANT" in config["wanted-trackers"]["trackers"]:
     print("Entering AnimeTorrents.")
-    username = config['animetorrents']['username']
-    password = config['animetorrents']['password']
-    profile_url = config['animetorrents']['profile_url']
-    
-    driver.get('https://animetorrents.me/login.php') #DO NOT CHANGE
-    time.sleep(3)
-    
-    #Navigation - Login
+    username = config["animetorrents"]["username"]
+    password = config["animetorrents"]["password"]
+    profile_url = config["animetorrents"]["profile_url"]
+
+    driver.get("https://animetorrents.me/login.php")  # DO NOT CHANGE
+
+    # Navigation - Login
     username_field = driver.find_element(By.NAME, "username")
     password_field = driver.find_element(By.NAME, "password")
-    
-    #Send username and password
+
+    # Send username and password
     username_field.send_keys(username)
     password_field.send_keys(password)
-    
-    #Login
+
+    # Login
     driver.find_element(By.ID, "login-element-6").click()
-    time.sleep(2)
-    
-    #Load profile and screenshot
-    driver.get(profile_url)
-    time.sleep(2)
-    datastring = datetime.datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
-    driver.save_screenshot("ANT_"+ datastring +".png")
-    print("ANT Screenshoted")  
- 
 
-if "RED" in config['wanted-trackers']['trackers']:
+    # Load profile and screenshot
+    driver.get(profile_url)
+
+    take_screenshot("ANT")
+    print("ANT Screenshoted")
+
+
+if "RED" in config["wanted-trackers"]["trackers"]:
     print("Entering Redacted.")
-    username = config['redacted']['username']
-    password = config['redacted']['password']
-    profile_url = config['redacted']['profile_url']
-    driver.get('https://redacted.ch/login.php') #Keep the link as it is, DO NOT CHANGE.
-    time.sleep(3)
-    
-    #Navigation - Login
+    username = config["redacted"]["username"]
+    password = config["redacted"]["password"]
+    profile_url = config["redacted"]["profile_url"]
+    driver.get(
+        "https://redacted.sh/login.php"
+    )  # Keep the link as it is, DO NOT CHANGE.
+
+    # Navigation - Login
     username_field = driver.find_element(By.NAME, "username")
     password_field = driver.find_element(By.NAME, "password")
-    
-    #Send username and password
+    twofa_field = driver.find_element(By.NAME, "qrcode_confirm")
+
+    # Send username and password
     username_field.send_keys(username)
     password_field.send_keys(password)
-    
-    #Login
+
+    # 2FA, ask for the code
+    code = input(
+        "Please enter the 2FA code: (If you don't have 2FA, just press enter.) "
+    )
+    twofa_field.send_keys(code)
+
+    # Login
     driver.find_element(By.CLASS_NAME, "submit").click()
-    time.sleep(2)
-    
-    #Load profile and screenshot
+
+    # Load profile and screenshot
     driver.get(profile_url)
-    time.sleep(2)
-    datastring = datetime.datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
-    driver.save_screenshot("RED_"+ datastring +".png")
-    print("RED Screenshoted") 
+
+    take_screenshot("RED")
+    print("RED Screenshoted")
 
 
-if "STC" in config['wanted-trackers']['trackers']:
+if "STC" in config["wanted-trackers"]["trackers"]:
     print("Entering SkipTheCommericals.")
-    username = config['skipthecommercials']['username']
-    password = config['skipthecommercials']['password']
-    profile_url = config['skipthecommercials']['profile_url']
-    
+    username = config["skipthecommercials"]["username"]
+    password = config["skipthecommercials"]["password"]
+    profile_url = config["skipthecommercials"]["profile_url"]
+
     driver.get(profile_url)
-    time.sleep(3) #wait 3 seconds to make sure the page loads
-    
-    #Navigation - DO NOT CHANGE
+
+    # Navigation - DO NOT CHANGE
     username_field = driver.find_element(By.NAME, "username")
     password_field = driver.find_element(By.NAME, "password")
-    
-    #Send username and password
+
+    # Send username and password
     username_field.send_keys(username)
     password_field.send_keys(password)
-    
-    #Login and save screenshot
-    driver.find_element(By.ID, "login-button").click()
-    time.sleep(2)
-    datastring = datetime.datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
-    driver.save_screenshot("STC_"+ datastring +".png")
-    print("SkipTheCommericals Screenshoted") 
-    
 
-if "STT" in config['wanted-trackers']['trackers']:
+    # Login and save screenshot
+    driver.find_element(By.ID, "login-button").click()
+
+    take_screenshot("STC")
+    print("SkipTheCommericals Screenshoted")
+
+
+if "STT" in config["wanted-trackers"]["trackers"]:
     print("Entering SkipTheTrailers.")
-    username = config['skipthetrailers']['username']
-    password = config['skipthetrailers']['password']
-    profile_url = config['skipthetrailers']['profile_url']
-    
-    driver.get(profile_url)
-    time.sleep(3) #wait 3 seconds to make sure the page loads
-    
-    #Navigation - DO NOT CHANGE
-    username_field = driver.find_element(By.NAME, "username")
-    password_field = driver.find_element(By.NAME, "password")
-    
-    #Send username and password
-    username_field.send_keys(username)
-    password_field.send_keys(password)
-    
-    #Login and save screenshot
-    driver.find_element(By.ID, "login-button").click()
-    time.sleep(3)
-    datastring = datetime.datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
-    driver.save_screenshot("STT_"+ datastring +".png")
-    print("SkipTheTrailers Screenshoted")
-    
-if "AB" in config['wanted-trackers']['trackers']:
-    print("Entering AnimeBytes")
-    username = config['animebytes']['username']
-    password = config['animebytes']['password']
-    profile_url = config['animebytes']['profile_url']
-    
-    driver.get('https://animebytes.tv/user.php') #Keep the link as it is, DO NOT CHANGE.
-    time.sleep(3)
-    
-    #Navigation - Login
-    username_field = driver.find_element(By.NAME, "username")
-    password_field = driver.find_element(By.NAME, "password")
-    
-    #Send username and password
-    username_field.send_keys(username)
-    password_field.send_keys(password)
-    
-    #Login
-    driver.find_element(By.CLASS_NAME, "submit").click()
-    time.sleep(2)
-    
-    #Load profile and screenshot
-    driver.get(profile_url) #Add your profile link
-    time.sleep(3)
-    datastring = datetime.datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
-    driver.save_screenshot("AB_"+ datastring +".png")
-    print("AnimeBytes Screenshoted") 
-    
-if "TDC" in config['wanted-trackers']['trackers']:
-    print("Entering TheDarkCommunity")
-    username = config['thedarkcommunity']['username']
-    password = config['thedarkcommunity']['password']
-    profile_url = config['thedarkcommunity']['profile_url']
-    
-    driver.get(profile_url)
-    time.sleep(3)
-    
-    #Navigation
-    username_field = driver.find_element(By.NAME, "username")
-    password_field = driver.find_element(By.NAME, "password")
-    
-    #Send username and password
-    username_field.send_keys(username)
-    password_field.send_keys(password)
-    
-    #Login and save screenshot
-    driver.find_element(By.ID, "login-button").click()
-    time.sleep(4)
-    datastring = datetime.datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
-    driver.save_screenshot("TDC_"+ datastring +".png")
-    print("TDC Screenshoted")
-    
+    username = config["skipthetrailers"]["username"]
+    password = config["skipthetrailers"]["password"]
+    profile_url = config["skipthetrailers"]["profile_url"]
 
-if "CRT" in config['wanted-trackers']['trackers']:
-    print("Entering Cathode-Ray.tube")
-    username = config['cathode-raytube']['username']
-    password = config['cathode-raytube']['password']
-    profile_url = config['cathode-raytube']['profile_url']
-    
-    driver.get('https://www.cathode-ray.tube/login') #Keep the link as it is, DO NOT CHANGE.
-    time.sleep(3)
-    
-    #Navigation - Login
+    driver.get(profile_url)
+
+    # Navigation - DO NOT CHANGE
     username_field = driver.find_element(By.NAME, "username")
     password_field = driver.find_element(By.NAME, "password")
-    
-    #Send username and password
+
+    # Send username and password
     username_field.send_keys(username)
     password_field.send_keys(password)
-    
-    #Login
+
+    # Login and save screenshot
+    driver.find_element(By.ID, "login-button").click()
+
+    take_screenshot("STT")
+    print("SkipTheTrailers Screenshoted")
+
+if "AB" in config["wanted-trackers"]["trackers"]:
+    print("Entering AnimeBytes")
+    username = config["animebytes"]["username"]
+    password = config["animebytes"]["password"]
+    profile_url = config["animebytes"]["profile_url"]
+
+    driver.get(
+        "https://animebytes.tv/user.php"
+    )  # Keep the link as it is, DO NOT CHANGE.
+
+    # Navigation - Login
+    username_field = driver.find_element(By.NAME, "username")
+    password_field = driver.find_element(By.NAME, "password")
+
+    # Send username and password
+    username_field.send_keys(username)
+    password_field.send_keys(password)
+
+    # Login
+    driver.find_element(By.CLASS_NAME, "submit").click()
+
+    # Load profile and screenshot
+    driver.get(profile_url)  # Add your profile link
+
+    take_screenshot("AB")
+    print("AnimeBytes Screenshoted")
+
+if "TDC" in config["wanted-trackers"]["trackers"]:
+    print("Entering TheDarkCommunity")
+    username = config["thedarkcommunity"]["username"]
+    password = config["thedarkcommunity"]["password"]
+    profile_url = config["thedarkcommunity"]["profile_url"]
+
+    driver.get(profile_url)
+
+    # Navigation
+    username_field = driver.find_element(By.NAME, "username")
+    password_field = driver.find_element(By.NAME, "password")
+
+    # Send username and password
+    username_field.send_keys(username)
+    password_field.send_keys(password)
+
+    # Login and save screenshot
+    driver.find_element(By.ID, "login-button").click()
+
+    take_screenshot("TDC")
+    print("TDC Screenshoted")
+
+
+if "CRT" in config["wanted-trackers"]["trackers"]:
+    print("Entering Cathode-Ray.tube")
+    username = config["cathode-raytube"]["username"]
+    password = config["cathode-raytube"]["password"]
+    profile_url = config["cathode-raytube"]["profile_url"]
+
+    driver.get(
+        "https://www.cathode-ray.tube/login"
+    )  # Keep the link as it is, DO NOT CHANGE.
+
+    # Navigation - Login
+    username_field = driver.find_element(By.NAME, "username")
+    password_field = driver.find_element(By.NAME, "password")
+
+    # Send username and password
+    username_field.send_keys(username)
+    password_field.send_keys(password)
+
+    # Login
     driver.find_element(By.ID, "login_button").click()
-    time.sleep(2)
-    
-    #Load profile and screenshot
-    driver.get(profile_url) 
-    time.sleep(2)
-    datastring = datetime.datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
-    driver.save_screenshot("CRT_"+ datastring +".png")
+
+    # 2FA is enabled, ask for the code
+    if driver.find_elements(By.NAME, "code"):
+        code = input("Please enter the 2FA code: ")
+        code_field = driver.find_element(By.NAME, "code")
+        code_field.send_keys(code)
+        driver.find_element(By.ID, "login_button").click()
+
+    # Load profile and screenshot
+    driver.get(profile_url)
+
+    # Hide passkey
+    try:
+        passkey_li = driver.find_element(By.XPATH, "//li[contains(text(), 'Passkey')]")
+        driver.execute_script("arguments[0].style.display = 'none';", passkey_li)
+    except:  # noqa: E722
+        pass
+
+    take_screenshot("CRT")
     print("CRT Screenshoted")
 
-if "MAM" in config['wanted-trackers']['trackers']:
+if "MAM" in config["wanted-trackers"]["trackers"]:
     print("Entering myanonamouse")
-    username = config['myanonamouse']['username']
-    password = config['myanonamouse']['password']
-    profile_url = config['myanonamouse']['profile_url']
-    
+    username = config["myanonamouse"]["username"]
+    password = config["myanonamouse"]["password"]
+    profile_url = config["myanonamouse"]["profile_url"]
+
     driver.get(profile_url)
-    time.sleep(3)
-    
-    #Navigation
+
+    # Navigation
     username_field = driver.find_element(By.NAME, "email")
     password_field = driver.find_element(By.NAME, "password")
-    
-    #Send username and password
+
+    # Send username and password
     username_field.send_keys(username)
     password_field.send_keys(password)
-    
-    #Login and save screenshot
+
+    # Login and save screenshot
     driver.find_element(By.CLASS_NAME, "btn").click()
-    time.sleep(4)
-    datastring = datetime.datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
-    driver.save_screenshot("MAM_"+ datastring +".png")
+
+    take_screenshot("MAM")
     print("myanonamouse Screenshoted")
 
-if "NBL" in config['wanted-trackers']['trackers']:
+if "NBL" in config["wanted-trackers"]["trackers"]:
     print("Entering Nebulance")
-    username = config['nebulance']['username']
-    password = config['nebulance']['password']
-    profile_url = config['nebulance']['profile_url']
-    
+    username = config["nebulance"]["username"]
+    password = config["nebulance"]["password"]
+    profile_url = config["nebulance"]["profile_url"]
+
     driver.get(profile_url)
-    time.sleep(3)
-    
-    #Navigation
+
+    # Navigation
     username_field = driver.find_element(By.NAME, "username")
     password_field = driver.find_element(By.NAME, "password")
-    
-    #Send username and password
+
+    # Send username and password
     username_field.send_keys(username)
     password_field.send_keys(password)
-    
-    #Login and save screenshot
+
+    # Login and save screenshot
     driver.find_element(By.NAME, "login").click()
-    time.sleep(4)
-    datastring = datetime.datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
-    driver.save_screenshot("NBL_"+ datastring +".png")
+
+    take_screenshot("NBL")
     print("Nebulance Screenshoted")
 
-if "TL" in config['wanted-trackers']['trackers']:
+if "TL" in config["wanted-trackers"]["trackers"]:
     print("Entering TorrentLeech")
-    username = config['torrentleech']['username']
-    password = config['torrentleech']['password']
-    profile_url = config['torrentleech']['profile_url']
-    
-    driver.get(profile_url)
-    time.sleep(3)
-    
-    #Navigation - Login
-    username_field = driver.find_element(By.NAME, "username")
-    password_field = driver.find_element(By.NAME, "password")
-    
-    #Send username and password
-    username_field.send_keys(username)
-    password_field.send_keys(password)
-    
-    #Login and save screenshot
-    driver.find_element(By.CLASS_NAME, "btn").click()
-    time.sleep(4)
-    datastring = datetime.datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
-    driver.save_screenshot("TL_"+ datastring +".png")
-    print("TorrentLeech Screenshoted")   
+    username = config["torrentleech"]["username"]
+    password = config["torrentleech"]["password"]
+    profile_url = config["torrentleech"]["profile_url"]
 
-if "OPS" in config['wanted-trackers']['trackers']:
-    print("Entering Orpheus")
-    username = config['orpheus']['username']
-    password = config['orpheus']['password']
-    profile_url = config['orpheus']['profile_url']
-    driver.get('https://orpheus.network/login.php') #Keep the link as it is, DO NOT CHANGE.
-    time.sleep(3)
-    
-    #Navigation - Login
+    driver.get(profile_url)
+
+    # Navigation - Login
     username_field = driver.find_element(By.NAME, "username")
     password_field = driver.find_element(By.NAME, "password")
-    
-    #Send username and password
+
+    # Send username and password
     username_field.send_keys(username)
     password_field.send_keys(password)
-    
-    #Login
-    driver.find_element(By.CLASS_NAME, "submit").click()
-    time.sleep(2)
-    
-    #Load profile and screenshot
-    driver.get(profile_url) #Add your profile link
-    time.sleep(2)
-    datastring = datetime.datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
-    driver.save_screenshot("OPS_"+ datastring +".png")
-    print("OPS Screenshoted") 
-    
-if "SZN" in config['wanted-trackers']['trackers']:
-    print("Entering Swarmazon")
-    username = config['swarmazon']['username']
-    password = config['swarmazon']['password']
-    profile_url = config['swarmazon']['profile_url']
-    
-    driver.get('https://swarmazon.club/en/account/login.php')
-    time.sleep(3)
-    
-    #Navigation - Login
-    username_field = driver.find_element(By.NAME, "username")
-    password_field = driver.find_element(By.NAME, "password")
-    
-    #Send username and password
-    username_field.send_keys(username)
-    password_field.send_keys(password)
-    
-    #Login
+
+    # Login and save screenshot
     driver.find_element(By.CLASS_NAME, "btn").click()
-    time.sleep(2)
-    
-    #Load profile and screenshot
-    driver.get(profile_url) #Keep as-is
-    time.sleep(2)
-    datastring = datetime.datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
-    driver.save_screenshot("Swarmazon_"+ datastring +".png")
+
+    take_screenshot("TL")
+    print("TorrentLeech Screenshoted")
+
+if "OPS" in config["wanted-trackers"]["trackers"]:
+    print("Entering Orpheus")
+    username = config["orpheus"]["username"]
+    password = config["orpheus"]["password"]
+    profile_url = config["orpheus"]["profile_url"]
+    driver.get(
+        "https://orpheus.network/login.php"
+    )  # Keep the link as it is, DO NOT CHANGE.
+
+    # Navigation - Login
+    username_field = driver.find_element(By.NAME, "username")
+    password_field = driver.find_element(By.NAME, "password")
+    twofa_field = driver.find_element(By.NAME, "twofa")
+
+    # Send username and password
+    username_field.send_keys(username)
+    password_field.send_keys(password)
+
+    # 2FA, ask for the code
+    code = input(
+        "Please enter the 2FA code: (If you don't have 2FA, just press enter.) "
+    )
+    twofa_field.send_keys(code)
+
+    # Login
+    driver.find_element(By.CLASS_NAME, "submit").click()
+
+    # Load profile and screenshot
+    driver.get(profile_url)  # Add your profile link
+
+    take_screenshot("OPS")
+    print("OPS Screenshoted")
+
+if "SZN" in config["wanted-trackers"]["trackers"]:
+    print("Entering Swarmazon")
+    username = config["swarmazon"]["username"]
+    password = config["swarmazon"]["password"]
+    profile_url = config["swarmazon"]["profile_url"]
+
+    driver.get("https://swarmazon.club/en/account/login.php")
+
+    # Navigation - Login
+    username_field = driver.find_element(By.NAME, "username")
+    password_field = driver.find_element(By.NAME, "password")
+
+    # Send username and password
+    username_field.send_keys(username)
+    password_field.send_keys(password)
+
+    # Login
+    driver.find_element(By.CLASS_NAME, "btn").click()
+
+    # Load profile and screenshot
+    driver.get(profile_url)  # Keep as-is
+
+    take_screenshot("Swarmazon")
     print("Swarmazon Screenshoted")
 
-if "MTV" in config['wanted-trackers']['trackers']:
+if "MTV" in config["wanted-trackers"]["trackers"]:
     print("Entering MoreThanTV")
-    username = config['morethantv']['username']
-    password = config['morethantv']['password']
-    profile_url = config['morethantv']['profile_url']
-    
+    username = config["morethantv"]["username"]
+    password = config["morethantv"]["password"]
+    profile_url = config["morethantv"]["profile_url"]
+
     driver.get(profile_url)
-    time.sleep(3) #wait 3 seconds to make sure the page loads
-   
-    #Navigation - DO NOT CHANGE
+
+    # Navigation - DO NOT CHANGE
     username_field = driver.find_element(By.NAME, "username")
     password_field = driver.find_element(By.NAME, "password")
-   
-    #Send username and password
+
+    # Send username and password
     username_field.send_keys(username)
     password_field.send_keys(password)
-  
-    #Login and save screenshot
     driver.find_element(By.ID, "login_button").click()
-    time.sleep(4)
-    datastring = datetime.datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
-    driver.save_screenshot("MoreThanTV_"+ datastring +".png")
-    print("MoreThanTV Screenshoted") 
 
-if "HDT" in config['wanted-trackers']['trackers']:
+    # 2FA is enabled, ask for the code
+    if driver.find_elements(By.NAME, "code"):
+        code = input("Please enter the 2FA code: ")
+        code_field = driver.find_element(By.NAME, "code")
+        code_field.send_keys(code)
+        driver.find_element(By.ID, "login_button").click()
+
+    # Hide passkey
+    try:
+        passkey_li = driver.find_element(By.XPATH, "//li[contains(text(), 'Passkey')]")
+        driver.execute_script("arguments[0].style.display = 'none';", passkey_li)
+    except:  # noqa: E722
+        pass
+
+    # Login and save screenshot
+    take_screenshot("MoreThanTV")
+    print("MoreThanTV Screenshoted")
+
+if "HDT" in config["wanted-trackers"]["trackers"]:
     print("Entering HD-Torrents")
-    username = config['hdtorrents']['username']
-    password = config['hdtorrents']['password']
-    profile_url = config['hdtorrents']['profile_url']
-    
-    driver.get('https://hd-torrents.org') #Keep the link as it is, DO NOT CHANGE.
-    time.sleep(3)
-    
-    #Navigation - Login
+    username = config["hdtorrents"]["username"]
+    password = config["hdtorrents"]["password"]
+    profile_url = config["hdtorrents"]["profile_url"]
+
+    driver.get("https://hd-torrents.org")  # Keep the link as it is, DO NOT CHANGE.
+
+    # Navigation - Login
     username_field = driver.find_element(By.NAME, "uid")
     password_field = driver.find_element(By.NAME, "pwd")
-    
-    #Send username and password
+
+    # Send username and password
     username_field.send_keys(username)
     password_field.send_keys(password)
-    
-    #Login
-    driver.find_element(By.XPATH, "/html/body/div[3]/table/tbody/tr/td/form/table/tbody/tr/td[1]/table/tbody/tr/td[5]/input").click()
-    time.sleep(2)
-    
-    #Load profile and screenshot
-    driver.get(profile_url) #Add your profile link
-    time.sleep(2)
-    datastring = datetime.datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
-    driver.save_screenshot("HDT_"+ datastring +".png")
-    print("HDT Screenshoted") 
-   
+
+    # Login
+    driver.find_element(
+        By.XPATH,
+        "/html/body/div[3]/table/tbody/tr/td/form/table/tbody/tr/td[1]/table/tbody/tr/td[5]/input",
+    ).click()
+
+    # Load profile and screenshot
+    driver.get(profile_url)  # Add your profile link
+
+    take_screenshot("HDT")
+    print("HDT Screenshoted")
+
+if "BTN" in config["wanted-trackers"]["trackers"]:
+    with SB(uc=True, locale_code="en") as sb:
+        print("Entering BroadcasTheNet")
+        username = config["broadcasthenet"]["username"]
+        password = config["broadcasthenet"]["password"]
+        profile_url = config["broadcasthenet"]["profile_url"]
+
+        sb.driver.uc_open_with_reconnect(profile_url, 1)
+
+        # Navigation - DO NOT CHANGE
+        username_field = "input[id='username']"
+        password_field = "input[id='password']"
+        login_button = "input[name='login']"
+
+        # Send username and password
+        sb.type(username_field, username)
+        sb.type(password_field, password)
+        sb.driver.reconnect(0.1)
+        sb.driver.uc_click(login_button, reconnect_time=4)
+        sb.wait_for_text_not_visible("Checking", timeout=10)
+
+        # 2FA is enabled, ask for the code
+        if sb.driver.find_elements(By.ID, "code"):
+            code = input("Please enter the 2FA code: ")
+            code_field = "input[id='code']"
+            sb.type(code_field, code)
+            submit_button = "input[type='submit']"
+            sb.driver.uc_click(submit_button, reconnect_time=4)
+
+        sb.driver.get(profile_url)
+
+        info_button = "a[href='#section2']"
+        sb.driver.uc_click(info_button, reconnect_time=4)
+        # Login and save screenshot
+        take_screenshot("BroadcasTheNet", sb.driver)
+        print("BroadcasTheNet Screenshoted")
+
+if "GGN" in config["wanted-trackers"]["trackers"]:
+    print("Entering GazelleGames")
+    username = config["gazellegames"]["username"]
+    password = config["gazellegames"]["password"]
+    profile_url = config["gazellegames"]["profile_url"]
+
+    driver.get(profile_url)
+
+    # Navigation - DO NOT CHANGE
+    username_field = driver.find_element(By.NAME, "username")
+    password_field = driver.find_element(By.NAME, "password")
+    twofa_field = driver.find_element(By.NAME, "authkey")
+
+    print(
+        "Manually solve the captcha image. Press enter when done. (If you use 2FA then press enter after you type the code below)"
+    )
+    code = input()
+
+    # Send username and password
+    username_field.send_keys(username)
+    password_field.send_keys(password)
+    twofa_field.send_keys(code)
+
+    driver.find_element(By.CLASS_NAME, "submit").click()
+
+    # Login and save screenshot
+    take_screenshot("GazelleGames")
+    print("GazelleGames Screenshoted")
+
+if "PTP" in config["wanted-trackers"]["trackers"]:
+    print("Entering PassThePopcorn")
+    username = config["passthepopcorn"]["username"]
+    password = config["passthepopcorn"]["password"]
+    profile_url = config["passthepopcorn"]["profile_url"]
+
+    driver.get(profile_url)
+
+    # Navigation - DO NOT CHANGE
+    username_field = driver.find_element(By.NAME, "username")
+    password_field = driver.find_element(By.NAME, "password")
+
+    # Send username and password
+    username_field.send_keys(username)
+    password_field.send_keys(password)
+
+    driver.find_element(By.ID, "login-button").click()
+    print("Manually solve the captcha image. Press enter when done.")
+    code = input()
+    driver.find_element(By.ID, "login-button").click()
+
+    # 2FA is enabled, ask for the code
+    if driver.find_elements(By.ID, "tfa-code"):
+        code = input("Please enter the 2FA code: ")
+        code_field = driver.find_element(By.ID, "tfa-code")
+        code_field.send_keys(code)
+        verify_button = driver.find_element(By.CSS_SELECTOR, "input[value='Verify']")
+        verify_button.click()
+
+    # is_load_at_runtime is set to ensure the full page screenshot is taken correctly
+    if config["settings"].get("full_page_screenshot", "false") == "true":
+        take_screenshot("PassThePopcorn", is_load_at_runtime=True)
+    else:
+        take_screenshot("PassThePopcorn")
+    print("PassThePopcorn Screenshoted")
+
+if "BHD" in config["wanted-trackers"]["trackers"]:
+    print("Entering BeyondHD")
+    username = config["beyond-hd"]["username"]
+    password = config["beyond-hd"]["password"]
+    profile_url = config["beyond-hd"]["profile_url"]
+
+    driver.get(profile_url)
+
+    # Navigation - DO NOT CHANGE
+    username_field = driver.find_element(By.NAME, "username")
+    password_field = driver.find_element(By.NAME, "password")
+
+    print("Manually solve the captcha. Press enter when done.")
+    code = input()
+    # Send username and password
+    username_field.send_keys(username)
+    password_field.send_keys(password)
+
+    driver.find_element(By.ID, "login-button").click()
+
+    # 2FA is enabled, ask for the code
+    if driver.find_elements(By.ID, "code"):
+        code = input("Please enter the 2FA code: ")
+        code_field = driver.find_element(By.ID, "code")
+        code_field.send_keys(code)
+        driver.find_element(By.ID, "login-button").click()
+
+    driver.get(profile_url)
+    # Login and save screenshot
+    take_screenshot("BeyondHD")
+    print("BeyondHD Screenshoted")
+
+if "OTW" in config["wanted-trackers"]["trackers"]:
+    print("Entering OTW.")
+    username = config["oldtoons"]["username"]
+    password = config["oldtoons"]["password"]
+    profile_url = config["oldtoons"]["profile_url"]
+
+    driver.get(profile_url)
+
+    # Navigation
+    username_field = driver.find_element(By.NAME, "username")
+    password_field = driver.find_element(By.NAME, "password")
+
+    # Send username and password
+    username_field.send_keys(username)
+    password_field.send_keys(password)
+
+    # Login and save screenshot
+    driver.find_element(By.CLASS_NAME, "auth-form__primary-button").click()
+
+    # 2FA is enabled, ask for the code
+    if driver.find_elements(By.ID, "code"):
+        code = input("Please enter the 2FA code: ")
+        code_field = driver.find_element(By.ID, "code")
+        code_field.send_keys(code)
+
+    take_screenshot("OTW")
+    print("OTW Screenshoted")
+
 else:
     driver.quit()
-    
+
 driver.quit()
 
 
-#GitHub: https://github.com/KlevGG/TrackerScreenshot
+# GitHub: https://github.com/KlevGG/TrackerScreenshot
